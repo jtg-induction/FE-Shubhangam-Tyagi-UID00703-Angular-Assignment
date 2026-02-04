@@ -1,0 +1,6 @@
+*.json
+*.html
+node_modules/
+dist/
+.vscode/
+docs/
