@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
-  title = 'ANGULAR_ASSIGNMENT_SHUBHANGAM_TYAGI';
+  title = 'Blog99';
 }
