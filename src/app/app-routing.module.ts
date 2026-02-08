@@ -3,6 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { PageNotFoundComponent } from './core/page-not-found/page-not-found.component';
 
 const routes: Routes = [
+  { path: '', redirectTo: 'auth/signup', pathMatch: 'full' },
+  { path: 'auth', loadChildren: () => import('@modules/auth/auth.module').then(m => m.AuthModule), title: 'Signup' },
   { path: '**', component: PageNotFoundComponent }, // Wildcard
 ];
 

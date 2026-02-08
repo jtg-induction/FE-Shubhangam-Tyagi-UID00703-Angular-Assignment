@@ -6,12 +6,12 @@ const eslintPluginPrettierRecommended = require('eslint-plugin-prettier/recommen
 module.exports = defineConfig([
   {
     ignores: [
-      "**/*.json",       
-      ".angular/**",    // for cache
-      "coverage/**",    // for use at time of unit test
-      "node_modules/**",// for packages
-      ".vscode/**",     // vs code config
-      "docs/**",        // for docs         
+      '**/*.json',
+      '.angular/**', // for cache
+      'coverage/**', // for use at time of unit test
+      'node_modules/**', // for packages
+      '.vscode/**', // vs code config
+      'docs/**', // for docs
     ],
     files: ['**/*.ts'],
     extends: [
@@ -39,6 +39,7 @@ module.exports = defineConfig([
           style: 'kebab-case',
         },
       ],
+       "@typescript-eslint/no-explicit-any": "off"
     },
   },
   {

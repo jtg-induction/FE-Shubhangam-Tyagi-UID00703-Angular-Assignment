@@ -37,4 +37,7 @@ testem.log
 Thumbs.db
 
 # docs
-/docs
+docs
+
+# development specific
+environments

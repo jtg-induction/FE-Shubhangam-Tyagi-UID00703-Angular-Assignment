@@ -64,7 +64,7 @@
     "*.{scss}": [
       "npx stylelint src/**/*/.scss --fix"
     ],
-    "*.{html}":[
+    "*.{html}": [
       "prettier --write"
     ]
   }
