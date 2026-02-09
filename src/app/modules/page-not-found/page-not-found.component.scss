@@ -1,0 +1,44 @@
+// @use 'abstracts/variables' as vars;
+// @use 'abstracts/mixins' as mixins;
+@use 'abstracts' as abs;
+
+// pages/_not-found.scss
+$primary-color: red;
+$text-light: pink;
+$text-secondary: yellow;
+
+.not-found {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  text-align: center;
+  background-color: abs.$bg-color;
+
+  &__error-code {
+    font-size: 8rem;
+    font-weight: 900;
+    color: $primary-color;
+    margin: 0;
+  }
+
+  &__message {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+    color: $text-secondary;
+  }
+
+  &__button {
+    @include abs.button-style;
+
+    padding: 10px 25px;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background 0.3s ease;
+
+    &:hover {
+      filter: brightness(90%);
+    }
+  }
+}
