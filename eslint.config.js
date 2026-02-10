@@ -50,7 +50,7 @@ module.exports = defineConfig([
           style: 'kebab-case',
         },
       ],
-       "@typescript-eslint/no-explicit-any": "off",
+      '@typescript-eslint/no-explicit-any': 'off',
       'import/no-unresolved': 'error',
       'import/no-duplicates': 'error',
       'import/no-cycle': ['error', { maxDepth: 1 }],

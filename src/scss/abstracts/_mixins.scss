@@ -1,7 +1,8 @@
 @use 'variables' as vars;
 
-@mixin flex-center {
+@mixin flex-center-column {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
 }

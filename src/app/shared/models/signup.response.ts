@@ -1,6 +1,17 @@
-import { User } from './user.model';
+export interface UserDetails {
+  id: number;
+  username: string;
+  email: string;
+  createdAt: string;
+  updatedAt: string;
+}
 
 export interface SignupResponse {
-  token: string;
-  data: User;
+  success: boolean;
+  message: string;
+  data: {
+    user: UserDetails;
+    token: string;
+  };
+  timestamp: string;
 }

@@ -15,6 +15,25 @@ export class PasswordValidator {
     return null;
   }
 
+  static specialCharacterRequired(control: AbstractControl) {
+    const password = control.value?.toString() || '';
+    const specialCharsArray = ['!', '@', '#', '$', '%'];
+
+    // Convert to Set
+    const specialSet = new Set(specialCharsArray);
+    let count = 0;
+
+    for (const char of password) {
+      // Check if the current character is in the specialChars set
+      if (specialSet.has(char)) {
+        count++;
+      }
+      if (count >= 2) return null;
+    }
+
+    return { atLeastTwoSpecialChars: true };
+  }
+
   static confirmPassword(control: AbstractControl): ValidationErrors | null {
     const password = control.get('password')?.value?.toString() || '';
     const confirmPassword = control.get('confirmPassword')?.value?.toString() || '';

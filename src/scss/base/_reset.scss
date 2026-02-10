@@ -5,6 +5,10 @@
   box-sizing: border-box;
 }
 
+::-webkit-scrollbar {
+  display: none;
+}
+
 /* 2. Remove default margin */
 *:not(dialog) {
   margin: 0;
@@ -18,12 +22,15 @@
 }
 
 body {
+  padding: 0;
+  box-sizing: border-box;
   margin: 0;
-  height: 100%;
+  min-height: 100vh;
   line-height: 1.5;
 
   /* 5. Improve text rendering */
   -webkit-font-smoothing: antialiased;
+  text-rendering: optimizespeed;
 }
 
 /* 6. Improve media defaults */

@@ -35,6 +35,10 @@
           } @else {
             @if (signupForm.get('password')?.errors?.['atLeastTwoDigitsRequired'] && signupForm.get('password')?.touched) {
               <mat-error>Password must contain atleast two digits</mat-error>
+            } @else {
+              @if (signupForm.get('password')?.errors?.['atLeastTwoSpecialChars'] && signupForm.get('password')?.touched) {
+                <mat-error>Password must have two special characters</mat-error>
+              }
             }
           }
         }

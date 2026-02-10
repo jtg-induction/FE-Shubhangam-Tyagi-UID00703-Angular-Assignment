@@ -1,11 +1,11 @@
 import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from '@core/services/auth-service';
 import { PasswordValidator } from '@modules/auth/validators/password.validator';
 import { AuthMessages } from '@shared/messages/auth-messages';
-import { Subscription } from 'rxjs';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { TokenService } from '@core/services/token-service';
 
 @Component({
@@ -28,7 +28,12 @@ export class SignupComponent implements OnInit, OnDestroy {
       {
         username: new FormControl(null, [Validators.required]),
         email: new FormControl(null, [Validators.required, Validators.email]),
-        password: new FormControl(null, [Validators.required, Validators.minLength(8), PasswordValidator.atLeastTwoDigitsRequired]),
+        password: new FormControl(null, [
+          Validators.required,
+          Validators.minLength(8),
+          PasswordValidator.atLeastTwoDigitsRequired,
+          PasswordValidator.specialCharacterRequired,
+        ]),
         confirmPassword: new FormControl(null, [Validators.required]),
       },
       { validators: [PasswordValidator.confirmPassword] } // form group level validator
@@ -41,7 +46,6 @@ export class SignupComponent implements OnInit, OnDestroy {
   handleSubmit() {
     this.obs = this.authService.signup(this.signupForm).subscribe({
       next: resp => {
-        console.log(resp.data);
         this.tokenService.saveToken(resp.data.token);
       },
       error: error => {
@@ -50,16 +54,17 @@ export class SignupComponent implements OnInit, OnDestroy {
         } else {
           this.errorMessage = AuthMessages.unexpectedErrorMessage;
         }
+        console.log(error.error.message);
         this.showErrorSnackBar(this.errorMessage);
       },
       complete: () => {
         console.log('completed');
+        this.showSuccessSnackBar('Signup Success');
         setTimeout(() => {
           this.router.navigate(['../login']);
         }, 1000);
       },
     });
-    // console.log(this.signupForm);
   }
 
   showErrorSnackBar(message: string) {
@@ -68,6 +73,15 @@ export class SignupComponent implements OnInit, OnDestroy {
       panelClass: ['error-snackbar'],
       horizontalPosition: 'center',
       verticalPosition: 'bottom',
+    });
+  }
+
+  showSuccessSnackBar(message: string) {
+    this.snackBar.open(message || 'Signup Success', 'Close', {
+      duration: 1000,
+      panelClass: ['success-snackbar'],
+      horizontalPosition: 'center',
+      verticalPosition: 'top',
     });
   }
 }

@@ -1,12 +1,10 @@
 @use 'abstracts' as abs;
 
 .not-found {
-  @include abs.flex-center;
+  @include abs.flex-center-column;
 
-  flex-direction: column;
   height: 100vh;
   text-align: center;
-  background-color: abs.$bg-color;
 
   &__error-code {
     font-size: abs.rem(128);
@@ -17,7 +15,7 @@
 
   &__message {
     font-size: abs.rem(24);
-    margin-bottom: abs.rem(32);
-    color: abs.$text-error-secondary;
+    margin: abs.rem(32);
+    color: abs.$secondary-error-color;
   }
 }
