@@ -37,9 +37,11 @@ export class LoginComponent implements OnInit {
 
   handleSubmit() {
     this.obs = this.authService.login(this.loginForm).subscribe({
-      next: resp => {
-        console.log(resp);
-        this.tokenService.saveToken(resp.data.token);
+      next: () => {
+        this.showSuccessSnackBar('Login Success');
+        setTimeout(() => {
+          this.router.navigate(['../../dashboard']);
+        }, 1000);
       },
       error: error => {
         if (error.status === 409) {
@@ -47,15 +49,7 @@ export class LoginComponent implements OnInit {
         } else {
           this.errorMessage = AuthMessages.unexpectedErrorMessage;
         }
-        console.log(error.error.message);
         this.showErrorSnackBar(this.errorMessage);
-      },
-      complete: () => {
-        console.log('completed');
-        this.showSuccessSnackBar('Login Success');
-        setTimeout(() => {
-          this.router.navigate(['../../dashboard']);
-        }, 1000);
       },
     });
   }
@@ -70,7 +64,7 @@ export class LoginComponent implements OnInit {
   }
 
   showSuccessSnackBar(message: string) {
-    this.snackBar.open(message || 'Login Success', 'Close', {
+    this.snackBar.open(message || 'Login Success', undefined, {
       duration: 1000,
       panelClass: ['success-snackbar'],
       horizontalPosition: 'center',

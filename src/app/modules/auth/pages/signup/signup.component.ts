@@ -1,4 +1,4 @@
-import { Component, inject, OnDestroy, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -13,7 +13,7 @@ import { TokenService } from '@core/services/token-service';
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.scss',
 })
-export class SignupComponent implements OnInit, OnDestroy {
+export class SignupComponent implements OnInit {
   title = 'Signup';
   errorMessage = '';
   signupForm!: FormGroup;
@@ -39,14 +39,14 @@ export class SignupComponent implements OnInit, OnDestroy {
       { validators: [PasswordValidator.confirmPassword] } // form group level validator
     );
   }
-  ngOnDestroy(): void {
-    this.obs.unsubscribe();
-  }
 
   handleSubmit() {
     this.obs = this.authService.signup(this.signupForm).subscribe({
-      next: resp => {
-        this.tokenService.saveToken(resp.data.token);
+      next: () => {
+        this.showSuccessSnackBar('Signup Success');
+        setTimeout(() => {
+          this.router.navigate(['../../dashboard']);
+        }, 1000);
       },
       error: error => {
         if (error.status === 409) {
@@ -56,13 +56,6 @@ export class SignupComponent implements OnInit, OnDestroy {
         }
         console.log(error.error.message);
         this.showErrorSnackBar(this.errorMessage);
-      },
-      complete: () => {
-        console.log('completed');
-        this.showSuccessSnackBar('Signup Success');
-        setTimeout(() => {
-          this.router.navigate(['../login']);
-        }, 1000);
       },
     });
   }
@@ -77,7 +70,7 @@ export class SignupComponent implements OnInit, OnDestroy {
   }
 
   showSuccessSnackBar(message: string) {
-    this.snackBar.open(message || 'Signup Success', 'Close', {
+    this.snackBar.open(message || 'Signup Success', undefined, {
       duration: 1000,
       panelClass: ['success-snackbar'],
       horizontalPosition: 'center',

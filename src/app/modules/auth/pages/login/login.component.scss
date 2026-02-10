@@ -38,3 +38,9 @@ p {
 p a {
   text-decoration: none;
 }
+
+.success-snackbar {
+  --mdc-snackbar-container-color: #2e7d32; /* Green background */
+  --mdc-snackbar-supporting-text-color: #fff; /* White text */
+  //   --mat-mdc-snack-bar-button-color: #ffffff; /* White button text */
+}

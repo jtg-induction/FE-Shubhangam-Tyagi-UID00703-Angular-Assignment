@@ -11,4 +11,16 @@ export class TokenService {
   saveToken(token: string) {
     localStorage.setItem('Token', token);
   }
+
+  /**
+   * Deletes the token in localstorage
+   * @param {string} token - the user's token
+   */
+  deleteToken() {
+    localStorage.removeItem('Token');
+  }
+
+  getToken() {
+    return localStorage.getItem('Token');
+  }
 }

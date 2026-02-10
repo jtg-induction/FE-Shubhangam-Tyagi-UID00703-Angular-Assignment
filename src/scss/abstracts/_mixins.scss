@@ -6,3 +6,7 @@
   align-items: center;
   flex-direction: column;
 }
+
+@mixin bg-image-indigo {
+  background-image: url("../../../src/assets/bg1.jpg");
+}
