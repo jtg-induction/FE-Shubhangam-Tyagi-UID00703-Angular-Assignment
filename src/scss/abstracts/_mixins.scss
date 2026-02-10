@@ -1,19 +1,4 @@
-@use '../abstracts/variables' as vars;
-
-@mixin button-style($color: vars.$primary-color) {
-  padding: 0.8rem 1.5rem;
-  border-radius: 5px;
-  background-color: white;
-  color: vars.$text-light;
-  border: none;
-  cursor: pointer;
-  transition: all 0.3s ease;
-
-  &:hover {
-    filter: brightness(90%);
-    transform: translateY(-2px);
-  }
-}
+@use 'variables' as vars;
 
 @mixin flex-center {
   display: flex;

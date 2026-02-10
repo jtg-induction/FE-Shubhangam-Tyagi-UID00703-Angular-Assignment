@@ -7,8 +7,8 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "lint": "ng lint && npx stylelint src/**/*.scss",
-    "lint:fix": "ng lint --fix &&  npx stylelint src/**/*/.scss",
+    "lint": "ng lint && stylelint src/**/*.scss",
+    "lint:fix": "ng lint --fix &&  stylelint src/**/*.scss --fix",
     "format": "prettier --write .",
     "prepare": "husky",
     "pre-comit": "lint-staged"
@@ -54,7 +54,6 @@
     "prettier-eslint": "^16.4.2",
     "stylelint": "^17.1.1",
     "stylelint-config-standard-scss": "^17.0.0",
-    "typedoc": "^0.28.16",
     "typescript": "~5.4.2",
     "typescript-eslint": "8.46.4"
   },
@@ -64,7 +63,8 @@
       "eslint --max-warnings 0 . --fix"
     ],
     "*.{scss}": [
-      "npx stylelint src/**/.scss --fix"
+      "prettier --write",
+      "stylelint src/**/*.scss --fix"
     ],
     "*.{html}": [
       "prettier --write"
