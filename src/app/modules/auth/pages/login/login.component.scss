@@ -1,7 +1,7 @@
 @use 'abstracts' as abs;
 
-.signup-card {
-  // height: 100vh;
+.login-card {
+  //   height: 100vh;
   width: abs.rem(400);
   margin: abs.rem(60) auto;
   padding: abs.rem(20);
@@ -19,7 +19,7 @@ form {
   padding: abs.rem(20);
 }
 
-.signup-btn {
+.login-btn {
   border-radius: 40px;
   height: abs.rem(50);
   width: 100%;
