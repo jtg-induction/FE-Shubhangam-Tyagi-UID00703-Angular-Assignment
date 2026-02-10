@@ -54,12 +54,16 @@ export class AuthService {
       })
     );
   }
-
+  /**
+   * Logout a user
+   */
   logout() {
     this.userToken.next('');
     this.tokenService.deleteToken();
   }
-
+  /**
+   * For automatic login of user if token present in local storage
+   */
   autoLogin() {
     const token = this.tokenService.getToken();
     if (!token) {
@@ -69,6 +73,10 @@ export class AuthService {
     this.userToken.next(token);
   }
 
+  /**
+   * Handles user token and helps in effective loggedIn state management
+   * @param {AuthResponse} res - the auth response
+   */
   private handleUserToken(res: AuthResponse) {
     // emitting user token
     this.userToken.next(res.data.token);

@@ -14,12 +14,15 @@ export class TokenService {
 
   /**
    * Deletes the token in localstorage
-   * @param {string} token - the user's token
    */
   deleteToken() {
     localStorage.removeItem('Token');
   }
 
+  /**
+   * Gets the token in localstorage
+   * @returns {string} token - the user's token
+   */
   getToken() {
     return localStorage.getItem('Token');
   }
