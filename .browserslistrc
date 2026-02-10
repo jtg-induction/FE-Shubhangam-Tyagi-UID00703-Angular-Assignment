@@ -1,0 +1,4 @@
+> 0.2% #All browsers that have at least 0,2% of global market share
+last 2 versions # last 2 versions of any browser modern browsers
+not dead #Exclude browsers without official support andnare not maintained now
+not ie <= 11 # Exclude Internet explorer older versions

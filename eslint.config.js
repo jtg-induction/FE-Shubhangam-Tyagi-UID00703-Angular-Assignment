@@ -3,6 +3,7 @@ const { defineConfig } = require('eslint/config');
 const tseslint = require('typescript-eslint');
 const angular = require('angular-eslint');
 const eslintPluginPrettierRecommended = require('eslint-plugin-prettier/recommended');
+const importPlugin = require('eslint-plugin-import');
 module.exports = defineConfig([
   {
     ignores: [
@@ -14,6 +15,9 @@ module.exports = defineConfig([
       'docs/**', // for docs
     ],
     files: ['**/*.ts'],
+    plugins: {
+      import: importPlugin,
+    },
     extends: [
       eslint.configs.recommended,
       tseslint.configs.recommended,
@@ -22,6 +26,13 @@ module.exports = defineConfig([
       eslintPluginPrettierRecommended,
     ],
     processor: angular.processInlineTemplates,
+    settings: {
+      'import/resolver': {
+        typescript: {
+          project: './tsconfig.json',
+        },
+      },
+    },
     rules: {
       '@angular-eslint/directive-selector': [
         'error',
@@ -39,7 +50,24 @@ module.exports = defineConfig([
           style: 'kebab-case',
         },
       ],
-       "@typescript-eslint/no-explicit-any": "off"
+       "@typescript-eslint/no-explicit-any": "off",
+      'import/no-unresolved': 'error',
+      'import/no-duplicates': 'error',
+      'import/no-cycle': ['error', { maxDepth: 1 }],
+      'import/order': [
+        'error',
+        {
+          groups: [
+            'builtin', // for node js core modules
+            'external', // for external libraries installed,
+            'internal', // for project codes,
+            'parent',
+            'sibling',
+            'index',
+            'type',
+          ],
+        },
+      ],
     },
   },
   {
