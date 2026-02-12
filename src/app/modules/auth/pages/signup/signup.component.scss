@@ -17,6 +17,7 @@ form {
   @include abs.flex-center-column;
 
   padding: abs.rem(20);
+  width: 100%;
 }
 
 .signup-btn {

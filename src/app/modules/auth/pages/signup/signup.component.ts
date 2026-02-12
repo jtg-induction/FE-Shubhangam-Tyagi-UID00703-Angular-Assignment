@@ -22,6 +22,7 @@ export class SignupComponent implements OnInit, OnDestroy {
   router: Router = inject(Router);
   obs!: Subscription;
   snackBar = inject(MatSnackBar);
+  isLoading = false;
 
   ngOnInit(): void {
     this.signupForm = new FormGroup(
@@ -44,6 +45,7 @@ export class SignupComponent implements OnInit, OnDestroy {
   }
 
   handleSubmit() {
+    this.isLoading = true;
     this.obs = this.authService.signup(this.signupForm).subscribe({
       next: resp => {
         this.tokenService.saveToken(resp.data.token);
@@ -56,11 +58,13 @@ export class SignupComponent implements OnInit, OnDestroy {
         }
         console.log(error.error.message);
         this.showErrorSnackBar(this.errorMessage);
+        this.isLoading = false;
       },
       complete: () => {
         console.log('completed');
         this.showSuccessSnackBar('Signup Success');
         setTimeout(() => {
+          this.isLoading = false;
           this.router.navigate(['../login']);
         }, 1000);
       },
@@ -71,16 +75,16 @@ export class SignupComponent implements OnInit, OnDestroy {
     this.snackBar.open(message || 'Signup failed', 'Close', {
       duration: 5000,
       panelClass: ['error-snackbar'],
-      horizontalPosition: 'center',
-      verticalPosition: 'bottom',
+      horizontalPosition: 'right',
+      verticalPosition: 'top',
     });
   }
 
   showSuccessSnackBar(message: string) {
-    this.snackBar.open(message || 'Signup Success', 'Close', {
-      duration: 1000,
+    this.snackBar.open(message || 'Signup Success', undefined, {
+      duration: 300,
       panelClass: ['success-snackbar'],
-      horizontalPosition: 'center',
+      horizontalPosition: 'right',
       verticalPosition: 'top',
     });
   }
