@@ -1,0 +1,21 @@
+@use 'abstracts' as abs;
+
+.articles-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: abs.rem(20);
+  align-items: stretch;
+}
+
+.no-articles-message {
+  color: white;
+  font-size: x-large;
+}
+
+.main-content {
+  padding: 20px;
+}
+
+.filters-container {
+  height: fit-content;
+}

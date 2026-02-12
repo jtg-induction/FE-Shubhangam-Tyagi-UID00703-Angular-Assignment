@@ -1,0 +1,18 @@
+@use 'abstracts' as vars;
+
+.article-card {
+  border-radius: 20px;
+  margin: 20px auto;
+  padding: 20px;
+  max-width: vars.rem(400);
+}
+
+mat-card-content p {
+  margin-bottom: 16px;
+  line-height: 1.5;
+  color: #555;
+}
+
+mat-chip-set {
+  margin-top: 10px;
+}

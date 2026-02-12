@@ -1,0 +1,23 @@
+<app-header></app-header>
+<div class="main-content">
+  <app-search-bar (searchChanged)="onSearch($event)"></app-search-bar>
+  @if (isLoading) {
+    <app-loader [message]="'Fetching your blog posts...'"></app-loader>
+  }
+
+  <div class="articles-container">
+    @for (article of articles; track $index) {
+      <app-article-card [article]="article"></app-article-card>
+    } @empty {
+      <div class="no-articles-message">No Articles found</div>
+    }
+  </div>
+</div>
+<mat-drawer-container class="filters-container" [hasBackdrop]="true">
+  <mat-drawer #drawer mode="side">
+    <app-filters-sidedrawer></app-filters-sidedrawer>
+  </mat-drawer>
+  <mat-drawer-content>
+    <button matButton="elevated" (click)="drawer.toggle()">Toggle drawer</button>
+  </mat-drawer-content>
+</mat-drawer-container>

@@ -1,0 +1,5 @@
+@use 'abstracts' as abs;
+
+form {
+  @include abs.flex-center-column;
+}

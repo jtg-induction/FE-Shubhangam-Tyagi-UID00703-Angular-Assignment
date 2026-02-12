@@ -1,0 +1,11 @@
+<mat-form-field class="search-field">
+  <mat-label>Search Articles</mat-label>
+  <mat-icon matPrefix>search</mat-icon>
+
+  <input matInput #searchInput placeholder="Type and click search..." />
+
+  <!-- Click event passes the raw value of the input to our function -->
+  <button matSuffix mat-icon-button (click)="handleSearch(searchInput.value)">
+    <mat-icon>arrow_forward</mat-icon>
+  </button>
+</mat-form-field>
