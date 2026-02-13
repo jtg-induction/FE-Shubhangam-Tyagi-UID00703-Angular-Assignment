@@ -2,11 +2,6 @@
 <div class="main-content">
   <div class="main-content-header">
     <app-search-bar (searchChanged)="onSearch($event)"></app-search-bar>
-    <app-paginator
-      [pageNumber]="pageIndex"
-      [pageSize]="pageSize"
-      [totalItems]="totalArticles"
-      (pageChanged)="handlePageChanged($event)"></app-paginator>
   </div>
 
   <!-- @if (isLoading) {
@@ -20,8 +15,16 @@
       <div class="no-articles-message">No Articles found</div>
     }
   </div>
-  <br />
+
+  <div class="main-content-footer">
+    <app-paginator
+      [pageNumber]="pageIndex"
+      [pageSize]="pageSize"
+      [totalItems]="totalArticles"
+      (pageChanged)="handlePageChanged($event)"></app-paginator>
+  </div>
 </div>
+
 <!-- <mat-drawer-container class="filters-container" [hasBackdrop]="true">
   <mat-drawer #drawer mode="side">
     <app-filters-sidedrawer></app-filters-sidedrawer>

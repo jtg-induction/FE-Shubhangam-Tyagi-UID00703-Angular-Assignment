@@ -1,6 +1,8 @@
-<mat-form-field class="search-field">
-  <mat-label>Search Articles</mat-label>
-  <mat-icon matPrefix>search</mat-icon>
+<div class="search-field">
+  <mat-form-field>
+    <mat-label>Search Articles</mat-label>
+    <mat-icon matPrefix>search</mat-icon>
 
-  <input matInput #searchInput placeholder="Type and click search..." (keyup)="handleSearch(searchInput.value)" />
-</mat-form-field>
+    <input matInput #searchInput placeholder="Enter text..." (keyup)="handleSearch(searchInput.value)" />
+  </mat-form-field>
+</div>

@@ -1,9 +1,9 @@
-@use 'abstracts' as abs;
+@use 'abstracts' as *;
 
 .articles-container {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: abs.rem(20);
+  gap: rem(20);
   align-items: stretch;
 }
 
@@ -13,18 +13,21 @@
 }
 
 .main-content {
-  padding: 20px;
-}
-
-.filters-container {
-  height: fit-content;
+  padding: rem(20);
 }
 
 .main-content-header {
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-between;
-  background-color: aliceblue;
-  border-radius: 20px;
+  justify-content: left;
+  width: 100%;
+  margin-left: rem(20);
+}
+
+.main-content-footer {
+  margin-top: rem(20);
+  display: flex;
+  align-items: center;
+  justify-content: right;
 }

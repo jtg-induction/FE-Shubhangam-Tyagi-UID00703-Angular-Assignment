@@ -29,7 +29,7 @@ export class HomepageComponent implements OnInit {
   onSearch(query: string) {
     this.router.navigate([], {
       relativeTo: this.route,
-      queryParams: { search: query },
+      queryParams: { search: query || null },
       queryParamsHandling: 'merge',
     });
   }

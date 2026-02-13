@@ -1,0 +1,9 @@
+@use 'abstracts' as *;
+
+.search-field .mat-mdc-form-field-subscript-wrapper {
+  display: none !important;
+}
+
+.search-field .mat-mdc-form-field-has-icon-prefix .mat-mdc-text-field-wrapper {
+  border-radius: 40px;
+}

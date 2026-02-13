@@ -1,10 +1,12 @@
 @use 'abstracts' as *;
 
 .search-field {
+  max-width: rem(400);
+}
+
+.mat-mdc-form-field {
+  border-radius: 40px;
   width: 100%;
 
-  // max-width: 500px; /* Adjust based on your header/layout */
-  background-color: aliceblue;
-  margin-top: rem(20);
-  margin-left: rem(20);
+  --mdc-filled-text-field-container-color: white !important;
 }
