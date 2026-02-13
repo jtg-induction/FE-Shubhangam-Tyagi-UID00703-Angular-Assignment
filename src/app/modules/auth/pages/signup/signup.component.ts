@@ -22,7 +22,8 @@ export class SignupComponent implements OnInit {
   obs!: Subscription;
   notificationService = inject(NotificationService);
   isLoading = false;
-
+  showPass = false;
+  showConfirmPass = false;
   ngOnInit(): void {
     this.signupForm = new FormGroup(
       {
@@ -58,5 +59,12 @@ export class SignupComponent implements OnInit {
         this.router.navigate(['../../dashboard']);
       },
     });
+  }
+
+  togglePasswordShow() {
+    this.showPass = !this.showPass;
+  }
+  toggleConfirmPasswordShow() {
+    this.showConfirmPass = !this.showConfirmPass;
   }
 }
