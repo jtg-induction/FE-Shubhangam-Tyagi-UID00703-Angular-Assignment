@@ -1,5 +1,7 @@
+@use 'abstracts' as abs;
+
 .loading-shade {
-  position: fixed; /* Ensures it stays in the center of the screen, not the div */
+  position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
@@ -7,19 +9,17 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 9999; /* Must be higher than your Toolbar/Cards */
+  z-index: 9999;
   background: rgb(255 255 255 / 80%);
 }
 
 .loading-text {
   margin-top: 15px;
   font-family: sans-serif;
-  color: #3f51b5; /* Matches Material Primary color */
+  color: #3f51b5;
   font-weight: 700;
   font-size: xx-large;
 }
-
-@use 'abstracts' as abs;
 
 .loader {
   @include abs.overlay;

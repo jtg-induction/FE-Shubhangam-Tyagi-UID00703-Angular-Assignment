@@ -11,7 +11,7 @@ import { Article } from '@shared/models/article.model';
 export class HomepageComponent implements OnInit {
   articleService: ArticleService = inject(ArticleService);
   articles!: Article[];
-  isLoading = true;
+  isLoading = false;
   router = inject(Router);
   route = inject(ActivatedRoute);
   ngOnInit(): void {

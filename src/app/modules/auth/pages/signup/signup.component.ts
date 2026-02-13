@@ -41,7 +41,7 @@ export class SignupComponent implements OnInit {
   }
 
   handleSubmit() {
-    this.isLoading = true;
+    this.isLoading = false;
     this.obs = this.authService.signup(this.signupForm).subscribe({
       next: () => {
         // this.showSuccessSnackBar('Signup Success');

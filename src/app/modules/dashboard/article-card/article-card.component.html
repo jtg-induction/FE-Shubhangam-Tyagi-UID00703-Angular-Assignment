@@ -1,16 +1,16 @@
-<mat-card class="article-card">
+<mat-card class="article-card" (click)="handleArticleClick(article)">
   <!-- Featured Image -->
   <!-- <img mat-card-image [src]="article.imageUrl" alt="Article featured image"> -->
 
   <mat-card-header>
     <!-- Author Name & Publication Date -->
-    <!-- <div mat-card-avatar class="author-image" [style.backgroundImage]="'url(' + article.authorImg + ')'"></div> -->
     <mat-card-title>{{ article.title }}</mat-card-title>
     <mat-card-subtitle> By {{ article.author }} • {{ article.createdAt | date: 'mediumDate' }} </mat-card-subtitle>
   </mat-card-header>
 
   <mat-card-content>
     <!-- Short Description -->
+    <img mat-image src="https://placehold.net/6.png" class="article-image" alt="img" />
     <p>{{ article.description }}</p>
 
     <!-- Tags using Chips -->
@@ -23,7 +23,7 @@
     </mat-chip-set>
   </mat-card-content>
 
-  <mat-card-actions align="end">
+  <!-- <mat-card-actions align="end">
     <button mat-raised-button color="primary" (click)="handleArticleClick(article)">READ MORE</button>
-  </mat-card-actions>
+  </mat-card-actions> -->
 </mat-card>

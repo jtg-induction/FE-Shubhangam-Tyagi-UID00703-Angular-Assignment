@@ -13,7 +13,7 @@ export class LoaderService {
   loading = this.isLoading.asObservable();
 
   show() {
-    this.isLoading.next(true);
+    this.isLoading.next(false);
   }
   hide() {
     this.isLoading.next(false);
