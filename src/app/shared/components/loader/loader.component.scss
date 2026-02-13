@@ -18,3 +18,9 @@
   font-weight: 700;
   font-size: xx-large;
 }
+
+@use 'abstracts' as abs;
+
+.loader {
+  @include abs.overlay;
+}

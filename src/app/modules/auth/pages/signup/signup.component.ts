@@ -2,11 +2,10 @@ import { Component, inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from '@core/services/auth-service';
 import { PasswordValidator } from '@modules/auth/validators/password.validator';
-import { AuthMessages } from '@shared/messages/auth-messages';
 import { TokenService } from '@core/services/token-service';
+import { NotificationService } from '@core/services/notification.service';
 
 @Component({
   selector: 'app-signup',
@@ -21,7 +20,8 @@ export class SignupComponent implements OnInit {
   tokenService: TokenService = inject(TokenService);
   router: Router = inject(Router);
   obs!: Subscription;
-  snackBar = inject(MatSnackBar);
+  notificationService = inject(NotificationService);
+  isLoading = false;
 
   ngOnInit(): void {
     this.signupForm = new FormGroup(
@@ -41,40 +41,37 @@ export class SignupComponent implements OnInit {
   }
 
   handleSubmit() {
+    this.isLoading = true;
     this.obs = this.authService.signup(this.signupForm).subscribe({
       next: () => {
-        this.showSuccessSnackBar('Signup Success');
-        setTimeout(() => {
-          this.router.navigate(['../../dashboard']);
-        }, 1000);
+        // this.showSuccessSnackBar('Signup Success');
       },
       error: error => {
-        if (error.status === 409) {
-          this.errorMessage = error.error.message;
-        } else {
-          this.errorMessage = AuthMessages.unexpectedErrorMessage;
-        }
-        console.log(error.error.message);
-        this.showErrorSnackBar(this.errorMessage);
+        this.errorMessage = error.error.message;
+        this.notificationService.showErrorSnackBar(this.errorMessage);
+        this.isLoading = false;
+      },
+      complete: () => {
+        console.log('completed');
+        this.notificationService.showSuccessSnackBar('Signup Success');
+        this.isLoading = false;
+        this.router.navigate(['../../dashboard']);
       },
     });
   }
 
-  showErrorSnackBar(message: string) {
-    this.snackBar.open(message || 'Signup failed', 'Close', {
-      duration: 5000,
-      panelClass: ['error-snackbar'],
-      horizontalPosition: 'center',
-      verticalPosition: 'bottom',
-    });
-  }
+  getErrorMessage(controlName: string): string {
+    const control = this.signupForm.get(controlName);
+    if (!control || !control.errors || !control.touched) return '';
 
-  showSuccessSnackBar(message: string) {
-    this.snackBar.open(message || 'Signup Success', undefined, {
-      duration: 1000,
-      panelClass: ['success-snackbar'],
-      horizontalPosition: 'center',
-      verticalPosition: 'top',
-    });
+    const errors = control.errors;
+    if (errors['required']) return `${controlName}  is required`;
+    if (errors['email']) return 'Please enter a valid email';
+    if (errors['minlength']) return `Minimum ${errors['minlength'].requiredLength} characters required`;
+    if (errors['atLeastTwoDigitsRequired']) return 'Password must contain at least two digits';
+    if (errors['atLeastTwoSpecialChars']) return 'Password must have two special characters';
+    if (errors['passwordNoMatch']) return 'Passwords do not match';
+
+    return '';
   }
 }

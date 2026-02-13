@@ -1,4 +1,6 @@
 /* 1. Use a more-intuitive box-sizing model */
+@use '@angular/material';
+
 *,
 *::before,
 *::after {
@@ -26,12 +28,7 @@ body {
   box-sizing: border-box;
   margin: 0;
   line-height: 1.5;
-  background-image: url('../../assets/bg1.jpg');
-  background-size: cover; /* Scales image to fill the screen */
-  background-position: center; /* Centers the image */
-  background-attachment: fixed; /* Image stays still while scrolling */
-  background-repeat: no-repeat;
-  min-height: 100vh;
+  background-color: #3f51b5;
 
   /* 5. Improve text rendering */
   -webkit-font-smoothing: antialiased;

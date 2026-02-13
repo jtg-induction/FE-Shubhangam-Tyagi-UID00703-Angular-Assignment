@@ -3,10 +3,10 @@ import { inject, Injectable } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { environment } from '@environments/environment.development';
 import { User } from '@shared/models/user.model';
 import { AuthResponse } from '@shared/models/auth.response';
 import { LoginRequest } from '@shared/models/login.request';
-import { environment } from '../../../environments/environment.development';
 import { TokenService } from './token-service';
 
 /**
