@@ -14,6 +14,7 @@ export class SearchBarComponent {
   }
 
   clearSearch() {
+    this.searchChanged.emit('');
     console.log('clicked clear search');
   }
 }

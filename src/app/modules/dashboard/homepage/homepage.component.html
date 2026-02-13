@@ -1,9 +1,13 @@
 <app-header></app-header>
 <div class="main-content">
-  <app-search-bar (searchChanged)="onSearch($event)"></app-search-bar>
-  @if (isLoading) {
+  <div class="main-content-header">
+    <app-search-bar (searchChanged)="onSearch($event)"></app-search-bar>
+    <app-paginator [totalItems]="totalArticles" (pageChanged)="handlePageChanged($event)"></app-paginator>
+  </div>
+
+  <!-- @if (isLoading) {
     <app-loader [message]="'Fetching your blog posts...'"></app-loader>
-  }
+  } -->
 
   <div class="articles-container">
     @for (article of articles; track $index) {
@@ -12,6 +16,7 @@
       <div class="no-articles-message">No Articles found</div>
     }
   </div>
+  <br />
 </div>
 <!-- <mat-drawer-container class="filters-container" [hasBackdrop]="true">
   <mat-drawer #drawer mode="side">

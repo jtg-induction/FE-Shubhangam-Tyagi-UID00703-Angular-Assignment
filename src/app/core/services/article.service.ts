@@ -21,7 +21,8 @@ export class ArticleService {
     // console.log(reqParams);
     return this.httpClient.get<ApiResponse>(`${this.apiUrl}articles`, { params: reqParams }).pipe(
       map(resp => {
-        return resp.data.data;
+        // console.log();
+        return resp.data;
       })
     );
   }
