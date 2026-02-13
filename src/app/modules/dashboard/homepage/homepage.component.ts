@@ -21,7 +21,7 @@ export class HomepageComponent implements OnInit {
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
       this.pageIndex = +params['pageIndex'] || 1;
-      this.pageSize = +params['pageSize'] || 10;
+      this.pageSize = +params['pageSize'] || 10; // + is converting string to number
       this.fetchArticles(params);
     });
   }
