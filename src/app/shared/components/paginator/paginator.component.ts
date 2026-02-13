@@ -11,9 +11,11 @@ export class PaginatorComponent {
   @Input() pageSize?: number;
   @Input() pageNumber?: number;
   @Output() pageChanged = new EventEmitter<PageEvent>();
-  pageSizeOptions = [5, 10, 15, 20];
+  pageSizeOptions = [5, 10, 15, 20, 25];
 
   getServerData(event: PageEvent) {
+    console.log('from event');
+    console.log(event);
     this.pageChanged.emit(event);
   }
 }

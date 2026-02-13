@@ -14,14 +14,14 @@ export class HomepageComponent implements OnInit {
   articles!: Article[];
   isLoading = false;
   totalArticles?: number;
-  pageSize = 10;
-  pageIndex = 0;
+  pageSize?: number;
+  pageIndex?: number;
   router = inject(Router);
   route = inject(ActivatedRoute);
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
-      this.pageIndex = +params['pageIndex'] || 1;
-      this.pageSize = +params['pageSize'] || 10; // + is converting string to number
+      this.pageIndex = +params['page'];
+      this.pageSize = +params['pageSize'] || 10; // + converting string to number
       this.fetchArticles(params);
     });
   }
@@ -38,8 +38,9 @@ export class HomepageComponent implements OnInit {
     this.articleService.getAllArticles(params).subscribe({
       next: resp => {
         // console.log(resp.totalItems);
-        this.articles = resp.data;
+        this.articles = resp?.data;
         this.totalArticles = resp?.totalItems;
+        this.pageIndex = resp?.currentPage - 1;
         this.isLoading = false;
       },
       error: error => {
@@ -50,12 +51,12 @@ export class HomepageComponent implements OnInit {
 
   handlePageChanged(pageEvent: PageEvent) {
     this.pageSize = pageEvent.pageSize;
-    this.pageIndex = pageEvent.pageIndex;
+    this.pageIndex = pageEvent.pageIndex + 1;
     this.router.navigate([], {
       relativeTo: this.route,
       queryParams: {
         pageSize: this.pageSize,
-        page: this.pageIndex + 1,
+        page: this.pageIndex,
       },
       queryParamsHandling: 'merge',
     });
