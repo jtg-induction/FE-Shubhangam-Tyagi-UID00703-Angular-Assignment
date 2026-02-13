@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
   obs!: Subscription;
   notificationService = inject(NotificationService);
   isLoading = false;
-
+  show = false;
   ngOnInit(): void {
     this.loginForm = new FormGroup({
       username: new FormControl(null, [Validators.required]),
@@ -53,5 +53,9 @@ export class LoginComponent implements OnInit {
         this.obs.unsubscribe();
       },
     });
+  }
+
+  togglePasswordShow() {
+    this.show = !this.show;
   }
 }
