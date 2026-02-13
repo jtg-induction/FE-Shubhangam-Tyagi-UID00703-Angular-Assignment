@@ -1,0 +1,12 @@
+.form-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px; /* Space between spinner and text */
+  width: 100%;
+}
+
+/* Ensure the spinner doesn't inherit button text alignment issues */
+mat-spinner {
+  display: inline-block;
+}
