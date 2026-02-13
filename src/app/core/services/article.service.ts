@@ -4,6 +4,7 @@ import { map } from 'rxjs/operators';
 import { ActivatedRoute, Params } from '@angular/router';
 import { environment } from 'src/environments/environment.development';
 import { ApiResponse } from '@shared/models/api.response';
+import { ArticleResponse } from '@shared/models/article.response';
 
 @Injectable({
   providedIn: 'root',
@@ -22,6 +23,14 @@ export class ArticleService {
     return this.httpClient.get<ApiResponse>(`${this.apiUrl}articles`, { params: reqParams }).pipe(
       map(resp => {
         // console.log();
+        return resp.data;
+      })
+    );
+  }
+
+  getArticleById(id: string) {
+    return this.httpClient.get<ArticleResponse>(`${this.apiUrl}articles/${id}`).pipe(
+      map(resp => {
         return resp.data;
       })
     );

@@ -1,4 +1,4 @@
-<mat-card class="article-card" (click)="handleArticleClick(article)">
+<mat-card class="article-card" (click)="handleArticleClick(article)" [routerLink]="['/articles', article.id]">
   <!-- Featured Image -->
   <!-- <img mat-card-image [src]="article.imageUrl" alt="Article featured image"> -->
 

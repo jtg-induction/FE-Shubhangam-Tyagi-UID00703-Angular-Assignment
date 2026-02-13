@@ -1,0 +1,48 @@
+@if (article) {
+  <article class="article-container">
+    <!-- Header Section -->
+    <header class="article-header">
+      <img src="https://placehold.net/6.png" [alt]="article.title" class="featured-image" />
+      <div class="meta-info">
+        <h1 class="title">{{ article.title }}</h1>
+        <div class="details">
+          <span
+            >By <strong>{{ article.author }}</strong></span
+          >
+          <time [attr.datetime]="article.createdAt">{{ article.createdAt | date: 'longDate' }}</time>
+        </div>
+      </div>
+    </header>
+
+    <!-- Tags -->
+    <div class="tag-list">
+      @for (tag of article.tags; track $index) {
+        <mat-chip color="primary">
+          {{ tag }}
+        </mat-chip>
+      }
+    </div>
+
+    <!-- Content Section -->
+    <section class="content">
+      <p class="summary">{{ article.shortDescription }}</p>
+
+      <div class="body-text">
+        <p>{{ article.description }}</p>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at porttitor sem. Aliquam erat volutpat. Donec placerat nisl magna, et
+          faucibus arcu condimentum sed.
+        </p>
+      </div>
+    </section>
+
+    <!-- footer-section -->
+
+    <footer class="article-footer">
+      <small>ID: {{ article.id }} | Updated: {{ article.updatedAt | date: 'short' }}</small>
+    </footer>
+  </article>
+
+} @else {
+  <h1>Loading........</h1>
+}
