@@ -3,9 +3,10 @@ import { inject, Injectable } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+
+import { environment } from '@environments/environment.development';
 import { User } from '@shared/models/user.model';
 import { SignupResponse } from '@shared/models/signup.response';
-import { environment } from '../../../environments/environment.development';
 
 /**
  * Authentication of user

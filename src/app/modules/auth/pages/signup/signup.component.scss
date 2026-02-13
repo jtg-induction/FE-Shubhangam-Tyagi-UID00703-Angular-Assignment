@@ -1,41 +1,61 @@
-@use 'abstracts' as abs;
+@use 'abstracts' as *;
+
+.signup-page {
+  @include flex-center-column;
+
+  min-height: 100vh;
+  padding: rem(20);
+}
 
 .signup-card {
-  height: 100vh;
-  width: abs.rem(400);
-  margin: abs.rem(60) auto;
-  padding: abs.rem(20);
+  width: 100%; // Full width on small screens
+  max-width: rem(400); // Caps width at 400px on desktop
+  padding: rem(20);
   border-radius: 20px;
-  border-color: red;
+
+  @media (width <= 480px) {
+    margin: rem(20) auto;
+    padding: rem(16);
+    box-shadow: none; // flat look on mobile
+  }
 }
 
 .full-width {
   width: 100%;
 }
 
-form {
-  @include abs.flex-center-column;
+.auth-form {
+  @include flex-center-column;
 
-  padding: abs.rem(20);
+  justify-content: space-between;
+  padding: rem(20) 0; // Vertical padding only
   width: 100%;
 }
 
 .signup-btn {
   border-radius: 40px;
-  height: abs.rem(50);
+  height: rem(50);
   width: 100%;
 }
 
-h2 {
+.form-title {
   text-align: center;
-  margin-bottom: abs.rem(20);
+  margin-bottom: rem(20);
   width: 100%;
+  font-size: rem(24);
 }
 
-p {
-  padding: abs.rem(5);
-}
+.auth-redirect {
+  margin-top: rem(8);
+  text-align: center;
+  font-size: rem(14);
 
-p a {
-  text-decoration: none;
+  a {
+    text-decoration: none;
+    font-weight: 500;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 }

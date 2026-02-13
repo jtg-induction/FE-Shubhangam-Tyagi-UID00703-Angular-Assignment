@@ -10,7 +10,7 @@ import { AppComponent } from './app.component';
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, HttpClientModule, AppRoutingModule, SharedModule, CoreModule],
+  imports: [BrowserModule, HttpClientModule, AppRoutingModule, CoreModule, SharedModule],
   providers: [provideAnimationsAsync()],
   bootstrap: [AppComponent],
 })

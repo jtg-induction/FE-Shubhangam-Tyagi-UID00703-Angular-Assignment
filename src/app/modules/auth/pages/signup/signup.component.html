@@ -1,59 +1,31 @@
 <div class="signup-page">
   <mat-card class="signup-card">
     <mat-card-header>
-      <h2>Create Account</h2>
+      <h2 class="form-title">Create Account</h2>
     </mat-card-header>
-    <form [formGroup]="signupForm" (submit)="handleSubmit()">
+    <form [formGroup]="signupForm" (submit)="handleSubmit()" class="auth-form">
       <mat-form-field class="full-width">
         <mat-label>Username</mat-label>
         <input matInput placeholder="Enter Username" formControlName="username" />
-        @if (signupForm.get('username')?.errors?.['required'] && signupForm.get('username')?.touched) {
-          <mat-error>Username is required</mat-error>
-        }
+        <mat-error>{{ signupForm.get('username') | controlError: 'Username' }}</mat-error>
       </mat-form-field>
 
       <mat-form-field class="full-width">
         <mat-label>Email</mat-label>
         <input matInput placeholder="Enter Email" formControlName="email" />
-        @if (signupForm.get('email')?.errors?.['required'] && signupForm.get('email')?.touched) {
-          <mat-error>Email is required</mat-error>
-        } @else {
-          @if (signupForm.get('email')?.errors?.['email'] && signupForm.get('email')?.touched) {
-            <mat-error>Please Enter Valid Email</mat-error>
-          }
-        }
+        <mat-error>{{ signupForm.get('email') | controlError: 'Email' }}</mat-error>
       </mat-form-field>
 
       <mat-form-field class="full-width">
         <mat-label>Password</mat-label>
         <input matInput placeholder="Enter Password" formControlName="password" type="password" />
-        @if (signupForm.get('password')?.errors?.['required'] && signupForm.get('password')?.touched) {
-          <mat-error>Password is required</mat-error>
-        } @else {
-          @if (signupForm.get('password')?.errors?.['minlength'] && signupForm.get('password')?.touched) {
-            <mat-error>Password length should be greater than 7</mat-error>
-          } @else {
-            @if (signupForm.get('password')?.errors?.['atLeastTwoDigitsRequired'] && signupForm.get('password')?.touched) {
-              <mat-error>Password must contain atleast two digits</mat-error>
-            } @else {
-              @if (signupForm.get('password')?.errors?.['atLeastTwoSpecialChars'] && signupForm.get('password')?.touched) {
-                <mat-error>Password must have two special characters</mat-error>
-              }
-            }
-          }
-        }
+        <mat-error>{{ signupForm.get('password') | controlError: 'Password' }}</mat-error>
       </mat-form-field>
       <mat-form-field class="full-width">
         <mat-label>Confirm Password</mat-label>
         <input type="password" matInput placeholder="Enter Password" formControlName="confirmPassword" />
 
-        @if (signupForm.get('confirmPassword')?.errors?.['required'] && signupForm.get('confirmPassword')?.touched) {
-          <mat-error>Confirm Password is required</mat-error>
-        } @else {
-          @if (signupForm.get('confirmPassword')?.errors?.['passwordNoMatch'] && signupForm.get('confirmPassword')?.touched) {
-            <mat-error>Password dont match</mat-error>
-          }
-        }
+        <mat-error>{{ signupForm.get('confirmPassword') | controlError: 'ConfirmPassword' }}</mat-error>
       </mat-form-field>
       <!-- <button mat-raised-button color="primary" class="full-width" type="submit" class="signup-btn" disabled="{{ !signupForm.valid }}">Signup</button> -->
       <app-form-button
@@ -63,7 +35,7 @@
         [text]="'Signup'"
         class="full-width"
         [isLoading]="isLoading"></app-form-button>
-      <p>Already Have an Account? <a routerLink="../login">Login</a></p>
+      <p class="auth-redirect">Already Have an Account? <a routerLink="../login">Login</a></p>
     </form>
   </mat-card>
 </div>
