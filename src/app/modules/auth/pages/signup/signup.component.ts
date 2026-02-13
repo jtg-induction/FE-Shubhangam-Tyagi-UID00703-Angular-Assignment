@@ -62,19 +62,4 @@ export class SignupComponent implements OnInit, OnDestroy {
       },
     });
   }
-
-  getErrorMessage(controlName: string): string {
-    const control = this.signupForm.get(controlName);
-    if (!control || !control.errors || !control.touched) return '';
-
-    const errors = control.errors;
-    if (errors['required']) return `${controlName}  is required`;
-    if (errors['email']) return 'Please enter a valid email';
-    if (errors['minlength']) return `Minimum ${errors['minlength'].requiredLength} characters required`;
-    if (errors['atLeastTwoDigitsRequired']) return 'Password must contain at least two digits';
-    if (errors['atLeastTwoSpecialChars']) return 'Password must have two special characters';
-    if (errors['passwordNoMatch']) return 'Passwords do not match';
-
-    return '';
-  }
 }
