@@ -2,7 +2,11 @@
 <div class="main-content">
   <div class="main-content-header">
     <app-search-bar (searchChanged)="onSearch($event)"></app-search-bar>
-    <app-paginator [totalItems]="totalArticles" (pageChanged)="handlePageChanged($event)"></app-paginator>
+    <app-paginator
+      [pageNumber]="pageIndex"
+      [pageSize]="pageSize"
+      [totalItems]="totalArticles"
+      (pageChanged)="handlePageChanged($event)"></app-paginator>
   </div>
 
   <!-- @if (isLoading) {
