@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
   obs!: Subscription;
   notificationService = inject(NotificationService);
   isLoading = false;
-
+  show = false;
   ngOnInit(): void {
     this.loginForm = new FormGroup({
       username: new FormControl(null, [Validators.required]),
@@ -36,18 +36,26 @@ export class LoginComponent implements OnInit {
   }
 
   handleSubmit() {
+    this.isLoading = true;
     this.obs = this.authService.login(this.loginForm).subscribe({
       next: () => {
-        this.notificationService.showSuccessSnackBar('Login Success');
-        this.router.navigate(['../../dashboard']);
+        /* empty */
       },
       error: error => {
         this.errorMessage = error.error.message;
         this.notificationService.showErrorSnackBar(this.errorMessage);
+        this.isLoading = false;
       },
       complete: () => {
+        this.notificationService.showSuccessSnackBar('Login Success');
+        this.router.navigate(['../../dashboard']);
+        this.isLoading = false;
         this.obs.unsubscribe();
       },
     });
+  }
+
+  togglePasswordShow() {
+    this.show = !this.show;
   }
 }

@@ -22,7 +22,8 @@ export class SignupComponent implements OnInit {
   obs!: Subscription;
   notificationService = inject(NotificationService);
   isLoading = false;
-
+  showPass = false;
+  showConfirmPass = false;
   ngOnInit(): void {
     this.signupForm = new FormGroup(
       {
@@ -60,18 +61,10 @@ export class SignupComponent implements OnInit {
     });
   }
 
-  getErrorMessage(controlName: string): string {
-    const control = this.signupForm.get(controlName);
-    if (!control || !control.errors || !control.touched) return '';
-
-    const errors = control.errors;
-    if (errors['required']) return `${controlName}  is required`;
-    if (errors['email']) return 'Please enter a valid email';
-    if (errors['minlength']) return `Minimum ${errors['minlength'].requiredLength} characters required`;
-    if (errors['atLeastTwoDigitsRequired']) return 'Password must contain at least two digits';
-    if (errors['atLeastTwoSpecialChars']) return 'Password must have two special characters';
-    if (errors['passwordNoMatch']) return 'Passwords do not match';
-
-    return '';
+  togglePasswordShow() {
+    this.showPass = !this.showPass;
+  }
+  toggleConfirmPasswordShow() {
+    this.showConfirmPass = !this.showConfirmPass;
   }
 }
