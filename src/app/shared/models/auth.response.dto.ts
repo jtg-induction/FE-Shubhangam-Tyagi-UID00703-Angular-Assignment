@@ -6,7 +6,7 @@ export interface UserDetails {
   updatedAt: string;
 }
 
-export interface SignupResponse {
+export interface AuthResponse {
   success: boolean;
   message: string;
   data: {

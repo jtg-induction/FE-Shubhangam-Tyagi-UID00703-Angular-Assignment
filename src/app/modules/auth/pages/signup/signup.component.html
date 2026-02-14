@@ -27,7 +27,6 @@
 
         <mat-error>{{ signupForm.get('confirmPassword') | controlError: 'ConfirmPassword' }}</mat-error>
       </mat-form-field>
-      <!-- <button mat-raised-button color="primary" class="full-width" type="submit" class="signup-btn" disabled="{{ !signupForm.valid }}">Signup</button> -->
       <app-form-button
         [type]="'submit'"
         [color]="'primary'"

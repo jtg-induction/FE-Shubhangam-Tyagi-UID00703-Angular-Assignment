@@ -6,6 +6,7 @@ import { AuthService } from '@core/services/auth-service';
 import { PasswordValidator } from '@modules/auth/validators/password.validator';
 import { TokenService } from '@core/services/token-service';
 import { NotificationService } from '@core/services/notification.service';
+import { SignupRequest } from '@shared/models/signup.request.dto';
 
 @Component({
   selector: 'app-signup',
@@ -24,6 +25,10 @@ export class SignupComponent implements OnInit, OnDestroy {
   isLoading = false;
 
   ngOnInit(): void {
+    this.setupForm();
+  }
+
+  setupForm() {
     this.signupForm = new FormGroup(
       {
         username: new FormControl(null, [Validators.required]),
@@ -39,13 +44,17 @@ export class SignupComponent implements OnInit, OnDestroy {
       { validators: [PasswordValidator.confirmPassword] } // form group level validator
     );
   }
-  ngOnDestroy(): void {
-    this.obs.unsubscribe();
-  }
 
   handleSubmit() {
     this.isLoading = true;
-    this.obs = this.authService.signup(this.signupForm).subscribe({
+    const formData = this.signupForm.getRawValue();
+    const signupRequest: SignupRequest = {
+      username: formData.username,
+      email: formData.email,
+      password: formData.password,
+    };
+
+    this.obs = this.authService.signup(signupRequest).subscribe({
       next: resp => {
         this.tokenService.saveToken(resp.data.token);
       },
@@ -61,5 +70,9 @@ export class SignupComponent implements OnInit, OnDestroy {
         this.router.navigate(['../login']);
       },
     });
+  }
+
+  ngOnDestroy(): void {
+    this.obs.unsubscribe();
   }
 }
