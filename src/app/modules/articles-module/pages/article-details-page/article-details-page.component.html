@@ -2,7 +2,7 @@
   <article class="article-container">
     <!-- Header Section -->
     <header class="article-header">
-      <img src="https://placehold.net/6.png" [alt]="article.title" class="featured-image" />
+      <img src="https://placehold.net/6.png" [alt]="article.title" class="bi lf me" />
       <div class="meta-info">
         <h1 class="title">{{ article.title }}</h1>
         <div class="details">
@@ -30,8 +30,17 @@
       <div class="body-text">
         <p>{{ article.description }}</p>
         <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at porttitor sem. Aliquam erat volutpat. Donec placerat nisl magna, et
-          faucibus arcu condimentum sed.
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur, pariatur asperiores atque facilis ratione sed ipsa, repudiandae quam at
+          necessitatibus, ducimus ex nulla corrupti. Iusto consectetur nostrum ducimus reprehenderit quas vero obcaecati distinctio est quia vel
+          quaerat non molestiae, doloremque facere error sit impedit natus reiciendis, illum aperiam dicta ipsam debitis ut. Obcaecati ipsa illo
+          ratione incidunt aut magni itaque quas, at provident quidem dignissimos adipisci aliquam sunt velit, aliquid, praesentium nulla tempora quis
+          illum impedit necessitatibus dolor. Ipsum praesentium impedit iusto esse, iure ipsa reprehenderit amet voluptatem deleniti saepe similique a
+          cum quisquam aspernatur aliquam id nobis dolores consequatur porro dolor. Ullam reprehenderit magni ea, quaerat quasi similique obcaecati
+          omnis culpa, esse qui eius mollitia exercitationem est, et quo libero perferendis! Itaque fuga quos vero, non labore hic? Inventore est, eos
+          perferendis id repellat maiores, molestias sit temporibus aut dolore perspiciatis veniam fugiat consectetur quae dolor eaque ea ipsa
+          asperiores facilis nisi autem iusto sunt. Cupiditate quo temporibus id consequatur laboriosam eius nemo necessitatibus a eum iure, minima
+          aperiam deserunt debitis expedita, hic illum ipsum? Aspernatur facere dolorem saepe, ab maxime voluptate soluta minus rem. Voluptates
+          consequatur doloribus blanditiis iure officia, deserunt eos perferendis accusantium numquam natus ut rerum.
         </p>
       </div>
     </section>
@@ -42,7 +51,6 @@
       <small>ID: {{ article.id }} | Updated: {{ article.updatedAt | date: 'short' }}</small>
     </footer>
   </article>
-
 } @else {
   <h1>Loading........</h1>
 }

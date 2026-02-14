@@ -1,4 +1,4 @@
-<mat-card class="article-card" (click)="handleArticleClick(article)" [routerLink]="['/articles', article.id]">
+<mat-card class="article-card" [routerLink]="['/articles', article.id]">
   <!-- Featured Image -->
   <!-- <img mat-card-image [src]="article.imageUrl" alt="Article featured image"> -->
 
@@ -22,8 +22,4 @@
       }
     </mat-chip-set>
   </mat-card-content>
-
-  <!-- <mat-card-actions align="end">
-    <button mat-raised-button color="primary" (click)="handleArticleClick(article)">READ MORE</button>
-  </mat-card-actions> -->
 </mat-card>

@@ -1,6 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ArticleService } from '@core/services/article.service';
+import { NotificationService } from '@core/services/notification.service';
 import { Article } from '@shared/models/article.model';
 
 @Component({
@@ -10,14 +11,21 @@ import { Article } from '@shared/models/article.model';
 })
 export class ArticleDetailsPageComponent implements OnInit {
   activatedRoute = inject(ActivatedRoute);
+  router = inject(Router);
   articleService = inject(ArticleService);
+  notificationService = inject(NotificationService);
   article!: Article;
 
   ngOnInit(): void {
     this.activatedRoute.paramMap.subscribe(val => {
-      this.articleService.getArticleById(val.get('id') || '').subscribe(res => {
-        console.log(res);
-        this.article = res;
+      this.articleService.getArticleById(val.get('id') || '').subscribe({
+        next: res => {
+          this.article = res;
+        },
+        error: error => {
+          this.notificationService.showErrorSnackBar(error.error.message);
+          this.router.navigate(['/dashboard']);
+        },
       });
     });
   }
