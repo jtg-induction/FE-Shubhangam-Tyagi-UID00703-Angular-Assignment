@@ -1,18 +1,17 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AuthService } from '@core/services/auth-service';
 import { TokenService } from '@core/services/token-service';
 import { PasswordValidator } from '@modules/auth/validators/password.validator';
-import { NotificationService } from '@core/services/notification.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
   title = 'Login';
   errorMessage = '';
   loginForm!: FormGroup;
@@ -20,7 +19,7 @@ export class LoginComponent implements OnInit {
   tokenService: TokenService = inject(TokenService);
   router: Router = inject(Router);
   obs!: Subscription;
-  notificationService = inject(NotificationService);
+  passSub!: Subscription;
   isLoading = false;
   show = false;
   ngOnInit(): void {
@@ -33,29 +32,33 @@ export class LoginComponent implements OnInit {
         PasswordValidator.specialCharacterRequired,
       ]),
     });
+
+    this.loginForm.get('password')?.valueChanges.subscribe(() => {
+      this.show = false;
+    });
   }
 
   handleSubmit() {
     this.isLoading = true;
     this.obs = this.authService.login(this.loginForm).subscribe({
       next: () => {
-        /* empty */
+        this.router.navigate(['/dashboard']);
       },
       error: error => {
         this.errorMessage = error.error.message;
-        this.notificationService.showErrorSnackBar(this.errorMessage);
         this.isLoading = false;
       },
       complete: () => {
-        this.notificationService.showSuccessSnackBar('Login Success');
-        this.router.navigate(['../../dashboard']);
+        this.errorMessage = '';
         this.isLoading = false;
-        this.obs.unsubscribe();
       },
     });
   }
 
   togglePasswordShow() {
     this.show = !this.show;
+  }
+  ngOnDestroy(): void {
+    this.obs?.unsubscribe();
   }
 }
