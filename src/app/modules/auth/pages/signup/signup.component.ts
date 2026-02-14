@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { AuthService } from '@core/services/auth-service';
 import { PasswordValidator } from '@modules/auth/validators/password.validator';
 import { TokenService } from '@core/services/token-service';
+import { SignupRequest } from '@shared/models/signup.request.dto';
 
 @Component({
   selector: 'app-signup',
@@ -23,6 +24,10 @@ export class SignupComponent implements OnInit, OnDestroy {
   showPass = false;
   showConfirmPass = false;
   ngOnInit(): void {
+    this.setupForm();
+  }
+
+  setupForm() {
     this.signupForm = new FormGroup(
       {
         username: new FormControl(null, [Validators.required]),
@@ -47,15 +52,18 @@ export class SignupComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnDestroy(): void {
-    this.obs?.unsubscribe();
-  }
-
   handleSubmit() {
     this.isLoading = true;
-    this.obs = this.authService.signup(this.signupForm).subscribe({
+    const formData = this.signupForm.getRawValue();
+    const signupRequest: SignupRequest = {
+      username: formData.username,
+      email: formData.email,
+      password: formData.password,
+    };
+
+    this.obs = this.authService.signup(signupRequest).subscribe({
       next: () => {
-        this.router.navigate(['../../dashboard']);
+        this.router.navigate(['/dashboard']);
       },
       error: error => {
         this.errorMessage = error.error.message;
@@ -73,5 +81,8 @@ export class SignupComponent implements OnInit, OnDestroy {
   }
   toggleConfirmPasswordShow() {
     this.showConfirmPass = !this.showConfirmPass;
+  }
+  ngOnDestroy(): void {
+    this.obs?.unsubscribe();
   }
 }

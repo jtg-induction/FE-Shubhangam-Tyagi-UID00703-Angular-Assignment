@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { AuthService } from '@core/services/auth-service';
 import { TokenService } from '@core/services/token-service';
 import { PasswordValidator } from '@modules/auth/validators/password.validator';
+import { LoginRequest } from '@shared/models/login.request';
 
 @Component({
   selector: 'app-login',
@@ -40,7 +41,12 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   handleSubmit() {
     this.isLoading = true;
-    this.obs = this.authService.login(this.loginForm).subscribe({
+    const formData = this.loginForm.getRawValue();
+    const loginRequest: LoginRequest = {
+      username: formData.username,
+      password: formData.password,
+    };
+    this.obs = this.authService.login(loginRequest).subscribe({
       next: () => {
         this.router.navigate(['/dashboard']);
       },
