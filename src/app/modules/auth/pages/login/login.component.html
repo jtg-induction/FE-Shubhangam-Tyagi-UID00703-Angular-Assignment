@@ -26,6 +26,11 @@
         class="full-width"
         [isLoading]="isLoading"></app-form-button>
       <p class="auth-redirect">Not Registered with Blog99? <a routerLink="../signup">Register Now</a></p>
+
+      <!-- displaying error message for unauthenticated user-->
+      @if (errorMessage) {
+        <mat-error>{{ errorMessage }}</mat-error>
+      }
     </form>
   </mat-card>
 </div>

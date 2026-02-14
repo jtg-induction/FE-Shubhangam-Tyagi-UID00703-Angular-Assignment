@@ -39,6 +39,10 @@
         class="full-width"
         [isLoading]="isLoading"></app-form-button>
       <p class="auth-redirect">Already Have an Account? <a routerLink="../login">Login</a></p>
+      <!-- displaying error message for unauthenticated user-->
+      @if (errorMessage) {
+        <mat-error>{{ errorMessage }}</mat-error>
+      }
     </form>
   </mat-card>
 </div>
