@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { AuthService } from '@core/services/auth-service';
 import { TokenService } from '@core/services/token-service';
 import { PasswordValidator } from '@modules/auth/validators/password.validator';
+import { LoginRequest } from '@shared/models/login.request';
 
 @Component({
   selector: 'app-login',
@@ -23,15 +24,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   isLoading = false;
   show = false;
   ngOnInit(): void {
-    this.loginForm = new FormGroup({
-      username: new FormControl(null, [Validators.required]),
-      password: new FormControl(null, [
-        Validators.required,
-        Validators.minLength(8),
-        PasswordValidator.atLeastTwoDigitsRequired,
-        PasswordValidator.specialCharacterRequired,
-      ]),
-    });
+    this.setupForm();
 
     this.loginForm.get('password')?.valueChanges.subscribe(() => {
       this.show = false;
@@ -40,7 +33,12 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   handleSubmit() {
     this.isLoading = true;
-    this.obs = this.authService.login(this.loginForm).subscribe({
+    const formData = this.loginForm.getRawValue();
+    const loginRequest: LoginRequest = {
+      username: formData.username,
+      password: formData.password,
+    };
+    this.obs = this.authService.login(loginRequest).subscribe({
       next: () => {
         this.router.navigate(['/dashboard']);
       },
@@ -52,6 +50,18 @@ export class LoginComponent implements OnInit, OnDestroy {
         this.errorMessage = '';
         this.isLoading = false;
       },
+    });
+  }
+
+  setupForm() {
+    this.loginForm = new FormGroup({
+      username: new FormControl(null, [Validators.required]),
+      password: new FormControl(null, [
+        Validators.required,
+        Validators.minLength(8),
+        PasswordValidator.atLeastTwoDigitsRequired,
+        PasswordValidator.specialCharacterRequired,
+      ]),
     });
   }
 
