@@ -37,7 +37,6 @@ export class HomepageComponent implements OnInit {
   fetchArticles(params: Params) {
     this.articleService.getAllArticles(params).subscribe({
       next: resp => {
-        // console.log(resp.totalItems);
         this.articles = resp?.data;
         this.totalArticles = resp?.totalItems;
         this.pageIndex = resp?.currentPage - 1;

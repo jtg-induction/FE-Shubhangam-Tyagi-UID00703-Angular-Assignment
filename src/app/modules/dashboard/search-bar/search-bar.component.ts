@@ -20,10 +20,6 @@ export class SearchBarComponent implements OnInit, OnDestroy {
     this.searchSubject.next(input);
   }
 
-  // clearSearch() {
-  //   this.searchSubject.next('');
-  //   console.log('clicked clear search');
-  // }
   ngOnDestroy(): void {
     this.searchSubscription?.unsubscribe();
   }

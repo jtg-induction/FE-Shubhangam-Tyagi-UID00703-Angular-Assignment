@@ -14,10 +14,9 @@ import { SharedModule } from '@shared/shared.module';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { HomepageComponent } from './homepage/homepage.component';
 import { ArticleCardComponent } from './article-card/article-card.component';
-import { FiltersSidedrawerComponent } from './filters-sidedrawer/filters-sidedrawer.component';
 import { SearchBarComponent } from './search-bar/search-bar.component';
 @NgModule({
-  declarations: [HomepageComponent, ArticleCardComponent, FiltersSidedrawerComponent, SearchBarComponent],
+  declarations: [HomepageComponent, ArticleCardComponent, SearchBarComponent],
   imports: [
     CommonModule,
     DashboardRoutingModule,
