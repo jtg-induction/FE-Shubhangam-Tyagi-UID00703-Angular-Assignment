@@ -1,7 +1,4 @@
 <mat-card class="article-card" [routerLink]="['/articles', article.id]">
-  <!-- Featured Image -->
-  <!-- <img mat-card-image [src]="article.imageUrl" alt="Article featured image"> -->
-
   <mat-card-header>
     <!-- Author Name & Publication Date -->
     <mat-card-title>{{ article.title }}</mat-card-title>
@@ -9,13 +6,14 @@
   </mat-card-header>
 
   <mat-card-content>
-    <!-- Short Description -->
+    <!-- Short Description and Featured article image -->
     <img mat-image src="https://placehold.net/6.png" class="article-image" alt="img" />
     <p>{{ article.description }}</p>
 
     <!-- Tags using Chips -->
     <mat-chip-set aria-label="Article tags">
-      @for (item of article.tags; track $index) {
+      <!-- only first 5 tags display -->
+      @for (item of article.tags | slice: 0 : 5; track $index) {
         <mat-chip color="primary">
           {{ item }}
         </mat-chip>

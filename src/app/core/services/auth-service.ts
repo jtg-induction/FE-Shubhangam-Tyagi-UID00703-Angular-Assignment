@@ -1,12 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { environment } from '@environments/environment.development';
-import { User } from '@shared/models/user.model';
-import { AuthResponse } from '@shared/models/auth.response';
 import { LoginRequest } from '@shared/models/login.request';
+import { SignupRequest } from '@shared/models/signup.request.dto';
+import { AuthResponse } from '@shared/models/auth.response.dto';
+import { API_PATHS } from '@shared/constants/path.constants';
 import { TokenService } from './token-service';
 
 /**
@@ -27,10 +27,8 @@ export class AuthService {
    * @param {string} formGroup - the signup form
    * @returns {Observable<AuthResponse>} An observable for containing user details along with user token.
    */
-  signup(formGroup: FormGroup): Observable<AuthResponse> {
-    const formData = formGroup.getRawValue();
-    const user = new User(formData.username, formData.email, formData.password);
-    return this.httpClient.post<AuthResponse>(`${this.apiUrl}users/register`, user).pipe(
+  signup(signupRequest: SignupRequest): Observable<AuthResponse> {
+    return this.httpClient.post<AuthResponse>(`${this.apiUrl}${API_PATHS.signup}`, signupRequest).pipe(
       tap(res => {
         this.handleUserToken(res);
       })
@@ -42,13 +40,8 @@ export class AuthService {
    * @param {string} formGroup - the login form
    * @returns {Observable<AuthResponse>} An observable for containing user details along with user token.
    */
-  login(formGroup: FormGroup): Observable<AuthResponse> {
-    const formData = formGroup.getRawValue();
-    const loginRequest: LoginRequest = {
-      username: formData.username,
-      password: formData.password,
-    };
-    return this.httpClient.post<AuthResponse>(`${this.apiUrl}users/login`, loginRequest).pipe(
+  login(loginRequest: LoginRequest): Observable<AuthResponse> {
+    return this.httpClient.post<AuthResponse>(`${this.apiUrl}${API_PATHS.login}`, loginRequest).pipe(
       tap(res => {
         this.handleUserToken(res);
       })

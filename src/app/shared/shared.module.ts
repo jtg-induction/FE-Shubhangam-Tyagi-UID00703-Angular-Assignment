@@ -8,9 +8,10 @@ import { HeaderComponent } from './components/header/header.component';
 import { FormButtonComponent } from './components/form-button/form-button.component';
 import { ControlErrorPipe } from './pipes/ControlErrorPipe';
 import { PaginatorComponent } from './components/paginator/paginator.component';
+import { SnackbarComponent } from './components/snackbar/snackbar.component';
 
 @NgModule({
-  declarations: [HeaderComponent, FormButtonComponent, ControlErrorPipe, PaginatorComponent],
+  declarations: [HeaderComponent, FormButtonComponent, ControlErrorPipe, PaginatorComponent, SnackbarComponent],
   imports: [CommonModule, MatToolbarModule, MatButtonModule, MatProgressSpinnerModule, MatPaginatorModule],
   exports: [HeaderComponent, FormButtonComponent, PaginatorComponent, ControlErrorPipe],
 })
