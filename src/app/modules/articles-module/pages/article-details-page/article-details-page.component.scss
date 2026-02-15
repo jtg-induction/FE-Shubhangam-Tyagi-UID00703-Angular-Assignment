@@ -3,8 +3,6 @@
 .article-container {
   max-width: 100%;
   margin: 2rem auto;
-
-  //   font-family: system-ui, -apple-system, sans-serif;
   line-height: 1.8;
   padding: 0 20px;
   color: white;
@@ -28,15 +26,11 @@
   margin: 1rem 0 0.5rem;
   font-weight: 750;
   line-height: 1.8;
-
-  //   color: #1a1a1a;
 }
 
 .details {
   display: flex;
   gap: 15px;
-
-  //   color: #666;
   font-size: 0.9rem;
   margin-bottom: 1.5rem;
 }
@@ -46,8 +40,6 @@
   gap: 8px;
   flex-wrap: wrap;
   margin-bottom: 2rem;
-
-  //   border: 2px solid greenyellow;
 }
 
 .tag {
@@ -55,15 +47,11 @@
   padding: 4px 12px;
   border-radius: 20px;
   font-size: 0.8rem;
-
-  //   color: #555;
 }
 
 .summary {
   font-size: 1.2rem;
   font-weight: 500;
-
-  //   color: #444;
   border-left: 4px solid #007bff;
   padding-left: 1rem;
 }
@@ -76,14 +64,10 @@
   margin-top: 3rem;
   padding-top: 1rem;
   border-top: 1px solid #eee;
-
-  //   color: #999;
 }
 
 @media (width <= 350px) {
   .title {
     font-size: 30px;
-
-    //  color: pink;
   }
 }
