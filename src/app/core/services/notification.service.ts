@@ -1,28 +1,25 @@
-import { inject, Injectable } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { SnackbarComponent } from '@shared/components/snackbar/snackbar.component';
+import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
+
+import { Notification } from '@shared/models/notification.model';
 
 @Injectable({ providedIn: 'root' })
 export class NotificationService {
-  snackBar = inject(MatSnackBar);
+  private snackbarSubject = new Subject<Notification>();
+  public snackbarState = this.snackbarSubject.asObservable();
 
-  showErrorSnackBar(message: string) {
-    this.snackBar.openFromComponent(SnackbarComponent, {
-      data: message,
-      duration: 5000,
-      panelClass: ['error-notification'],
-      horizontalPosition: 'right',
-      verticalPosition: 'top',
+  showSuccess(message: string) {
+    this.snackbarSubject.next({
+      show: true,
+      message,
+      type: 'success',
     });
   }
-
-  showSuccessSnackBar(message: string) {
-    this.snackBar.openFromComponent(SnackbarComponent, {
-      data: message,
-      duration: 300,
-      panelClass: ['success-notification'],
-      horizontalPosition: 'right',
-      verticalPosition: 'top',
+  showError(message: string) {
+    this.snackbarSubject.next({
+      show: true,
+      message,
+      type: 'danger',
     });
   }
 }

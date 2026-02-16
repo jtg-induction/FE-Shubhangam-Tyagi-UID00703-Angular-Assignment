@@ -2,10 +2,11 @@ import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { AuthService } from '@core/services/auth-service';
+import { AuthService } from '@core/services/auth.service';
 import { PasswordValidator } from '@modules/auth/validators/password.validator';
-import { TokenService } from '@core/services/token-service';
-import { SignupRequest } from '@shared/models/signup.request.dto';
+import { TokenService } from '@core/services/token.service';
+import { SignupRequest } from '@shared/models/signup.request.model';
+import { NotificationService } from '@core/services/notification.service';
 
 @Component({
   selector: 'app-signup',
@@ -23,6 +24,7 @@ export class SignupComponent implements OnInit, OnDestroy {
   isLoading = false;
   showPass = false;
   showConfirmPass = false;
+  notificationService = inject(NotificationService);
   ngOnInit(): void {
     this.setupForm();
   }
@@ -62,8 +64,9 @@ export class SignupComponent implements OnInit, OnDestroy {
     };
 
     this.obs = this.authService.signup(signupRequest).subscribe({
-      next: () => {
+      next: resp => {
         this.router.navigate(['/dashboard']);
+        this.tokenService.saveToken(resp.data.token);
       },
       error: error => {
         this.errorMessage = error.error.message;
