@@ -5,7 +5,7 @@ import { Subscription } from 'rxjs';
 import { AuthService } from '@core/services/auth.service';
 import { TokenService } from '@core/services/token.service';
 import { PasswordValidator } from '@modules/auth/validators/password.validator';
-import { LoginRequest } from '@shared/models/login.request';
+import { LoginRequest } from '@shared/models/login.request.model';
 
 @Component({
   selector: 'app-login',
