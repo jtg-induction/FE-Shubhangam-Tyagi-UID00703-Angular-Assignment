@@ -7,7 +7,7 @@
 
   <mat-card-content>
     <!-- Short Description and Featured article image -->
-    <img mat-image src="https://placehold.net/6.png" class="article-image" alt="img" />
+    <img mat-image [src]="article.image" class="article-image" alt="img" />
     <p>{{ article.description }}</p>
 
     <!-- Tags using Chips -->

@@ -2,7 +2,7 @@
 
 .articles-container {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(rem(300), 1fr));
   gap: rem(20);
   align-items: stretch;
 }

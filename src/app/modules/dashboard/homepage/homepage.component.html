@@ -4,10 +4,6 @@
     <app-search-bar (searchChanged)="onSearch($event)"></app-search-bar>
   </div>
 
-  <!-- @if (isLoading) {
-    <app-loader [message]="'Fetching your blog posts...'"></app-loader>
-  } -->
-
   <div class="articles-container">
     @for (article of articles; track $index) {
       <app-article-card [article]="article"></app-article-card>
