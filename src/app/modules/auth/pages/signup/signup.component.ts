@@ -6,7 +6,7 @@ import { AuthService } from '@core/services/auth-service';
 import { PasswordValidator } from '@modules/auth/validators/password.validator';
 import { TokenService } from '@core/services/token-service';
 import { NotificationService } from '@core/services/notification.service';
-import { SignupRequest } from '@shared/models/signup.request.dto';
+import { SignupRequest } from '@shared/models/signup.request.model';
 
 @Component({
   selector: 'app-signup',

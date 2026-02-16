@@ -4,8 +4,8 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
 import { environment } from '@environments/environment.development';
-import { SignupRequest } from '@shared/models/signup.request.dto';
-import { AuthResponse } from '@shared/models/auth.response.dto';
+import { SignupRequest } from '@shared/models/signup.request.model';
+import { AuthResponse } from '@shared/models/auth.response.model';
 
 /**
  * Authentication of user
