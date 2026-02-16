@@ -1,0 +1,23 @@
+.snackbar-wrap {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: 20px;
+  border-radius: 5px;
+  min-width: 20%;
+
+  &.success {
+    background: rgb(0 173 72);
+  }
+
+  &.danger {
+    background: red;
+  }
+
+  .snackbar-text {
+    text-align: center;
+    font-size: 1.3em;
+    color: white;
+    margin: 0;
+  }
+}

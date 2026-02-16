@@ -13,7 +13,7 @@
   padding: rem(20);
   border-radius: 20px;
 
-  @include mobile-card;
+  @include for-phone-only;
 }
 
 .full-width {

@@ -1,3 +1,7 @@
-<div>
-  <p>{{ data }}</p>
-</div>
+@if (show) {
+  <div [ngClass]="['snackbar-wrap', type]">
+    <p class="snackbar-text">
+      {{ message }}
+    </p>
+  </div>
+}
