@@ -2,8 +2,8 @@ import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { AuthService } from '@core/services/auth-service';
-import { TokenService } from '@core/services/token-service';
+import { AuthService } from '@core/services/auth.service';
+import { TokenService } from '@core/services/token.service';
 import { PasswordValidator } from '@modules/auth/validators/password.validator';
 import { LoginRequest } from '@shared/models/login.request';
 

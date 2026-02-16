@@ -2,6 +2,8 @@
 
 .search-field {
   max-width: rem(400);
+  overflow: hidden;
+  border-radius: 20px;
 }
 
 .mat-mdc-form-field {

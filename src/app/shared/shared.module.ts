@@ -13,6 +13,6 @@ import { SnackbarComponent } from './components/snackbar/snackbar.component';
 @NgModule({
   declarations: [HeaderComponent, FormButtonComponent, ControlErrorPipe, PaginatorComponent, SnackbarComponent],
   imports: [CommonModule, MatToolbarModule, MatButtonModule, MatProgressSpinnerModule, MatPaginatorModule],
-  exports: [HeaderComponent, FormButtonComponent, PaginatorComponent, ControlErrorPipe],
+  exports: [HeaderComponent, FormButtonComponent, SnackbarComponent, PaginatorComponent, ControlErrorPipe],
 })
 export class SharedModule {}
