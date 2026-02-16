@@ -1,7 +1,7 @@
-import { Component, inject, OnDestroy, OnInit } from '@angular/core';
+import { Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { AuthService } from '@core/services/auth.service';
 import { TokenService } from '@core/services/token.service';
 import { PasswordValidator } from '@modules/auth/validators/password.validator';
@@ -12,23 +12,25 @@ import { LoginRequest } from '@shared/models/login.request';
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
 })
-export class LoginComponent implements OnInit, OnDestroy {
+export class LoginComponent implements OnInit {
   title = 'Login';
   errorMessage = '';
   loginForm!: FormGroup;
   authService: AuthService = inject(AuthService);
   tokenService: TokenService = inject(TokenService);
   router: Router = inject(Router);
-  obs!: Subscription;
-  passSub!: Subscription;
   isLoading = false;
   show = false;
+  private destroyRef = inject(DestroyRef);
   ngOnInit(): void {
     this.setupForm();
 
-    this.loginForm.get('password')?.valueChanges.subscribe(() => {
-      this.show = false;
-    });
+    this.loginForm
+      .get('password')
+      ?.valueChanges.pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(() => {
+        this.show = false;
+      });
   }
 
   handleSubmit() {
@@ -38,19 +40,22 @@ export class LoginComponent implements OnInit, OnDestroy {
       username: formData.username,
       password: formData.password,
     };
-    this.obs = this.authService.login(loginRequest).subscribe({
-      next: () => {
-        this.router.navigate(['/dashboard']);
-      },
-      error: error => {
-        this.errorMessage = error.error.message;
-        this.isLoading = false;
-      },
-      complete: () => {
-        this.errorMessage = '';
-        this.isLoading = false;
-      },
-    });
+    this.authService
+      .login(loginRequest)
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe({
+        next: () => {
+          this.router.navigate(['/dashboard']);
+        },
+        error: error => {
+          this.errorMessage = error.error.message;
+          this.isLoading = false;
+        },
+        complete: () => {
+          this.errorMessage = '';
+          this.isLoading = false;
+        },
+      });
   }
 
   setupForm() {
@@ -67,8 +72,5 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   togglePasswordShow() {
     this.show = !this.show;
-  }
-  ngOnDestroy(): void {
-    this.obs?.unsubscribe();
   }
 }
