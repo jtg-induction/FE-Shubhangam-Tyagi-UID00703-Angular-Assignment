@@ -2,9 +2,10 @@ import { HttpEvent, HttpHandler, HttpHeaders, HttpInterceptor, HttpRequest } fro
 import { inject, Injectable } from '@angular/core';
 import { catchError, exhaustMap, Observable, take, throwError } from 'rxjs';
 import { Router } from '@angular/router';
-import { AuthService } from '@core/services/auth-service';
-import { TokenService } from '@core/services/token-service';
+import { AuthService } from '@core/services/auth.service';
+import { TokenService } from '@core/services/token.service';
 import { NotificationService } from '@core/services/notification.service';
+
 /**
  * Interceptor for intercepting API requests
  */
@@ -30,7 +31,7 @@ export class AuthInterceptor implements HttpInterceptor {
       catchError(error => {
         if (error.status === 401) {
           this.tokenService.deleteToken();
-          this.notificationService.showErrorSnackBar(error.error.message);
+          this.notificationService.showError(error.error.message);
           this.router.navigate(['/auth/login']);
         }
         return throwError(() => error);

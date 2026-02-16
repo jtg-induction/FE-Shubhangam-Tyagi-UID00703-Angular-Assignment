@@ -23,7 +23,7 @@ export class ArticleDetailsPageComponent implements OnInit {
           this.article = res;
         },
         error: error => {
-          this.notificationService.showErrorSnackBar(error.error.message);
+          this.notificationService.showError(error.error.message);
           this.router.navigate(['/dashboard']);
         },
       });

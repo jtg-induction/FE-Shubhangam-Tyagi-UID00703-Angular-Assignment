@@ -3,8 +3,8 @@ import { inject, Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { ActivatedRoute, Params } from '@angular/router';
 import { environment } from '@environments/environment.development';
-import { ApiResponse } from '@shared/models/api.response';
-import { ArticleResponse } from '@shared/models/article.response';
+import { ApiResponse } from '@shared/models/api.response.model';
+import { ArticleResponse } from '@shared/models/article.response.model';
 import { API_PATHS } from '@shared/constants/path.constants';
 
 /**
