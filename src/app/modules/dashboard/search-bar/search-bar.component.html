@@ -1,0 +1,4 @@
+<div class="search-box">
+  <mat-icon class="material-symbols-outlined"> search </mat-icon>
+  <input #searchInput placeholder="Enter text to search" (keyup)="handleSearch(searchInput.value)" class="search-input" [value]="searchText" />
+</div>

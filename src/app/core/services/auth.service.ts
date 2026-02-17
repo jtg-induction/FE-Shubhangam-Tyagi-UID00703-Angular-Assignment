@@ -3,7 +3,7 @@ import { inject, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { environment } from '@environments/environment.development';
-import { LoginRequest } from '@shared/models/login.request';
+import { LoginRequest } from '@shared/models/login.request.model';
 import { SignupRequest } from '@shared/models/signup.request.model';
 import { AuthResponse } from '@shared/models/auth.response.model';
 import { API_PATHS } from '@shared/constants/path.constants';

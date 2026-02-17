@@ -1,0 +1,22 @@
+<app-header></app-header>
+<div class="main-content">
+  <div class="main-content-header">
+    <app-search-bar (searchChanged)="onSearch($event)" [searchText]="searchText"></app-search-bar>
+  </div>
+
+  <div class="articles-container">
+    @for (article of articles; track $index) {
+      <app-article-card [article]="article"></app-article-card>
+    } @empty {
+      <div class="no-articles-message">No Articles found</div>
+    }
+  </div>
+
+  <div class="main-content-footer">
+    <app-paginator
+      [pageNumber]="pageIndex"
+      [pageSize]="pageSize"
+      [totalItems]="totalArticles"
+      (pageChanged)="handlePageChanged($event)"></app-paginator>
+  </div>
+</div>

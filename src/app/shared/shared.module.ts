@@ -1,14 +1,18 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { HeaderComponent } from './components/header/header.component';
 import { FormButtonComponent } from './components/form-button/form-button.component';
 import { ControlErrorPipe } from './pipes/ControlErrorPipe';
+import { PaginatorComponent } from './components/paginator/paginator.component';
 import { SnackbarComponent } from './components/snackbar/snackbar.component';
 
 @NgModule({
-  declarations: [FormButtonComponent, ControlErrorPipe, SnackbarComponent],
-  imports: [CommonModule, MatButtonModule, MatProgressSpinnerModule],
-  exports: [FormButtonComponent, SnackbarComponent, ControlErrorPipe],
+  declarations: [HeaderComponent, FormButtonComponent, ControlErrorPipe, PaginatorComponent, SnackbarComponent],
+  imports: [CommonModule, MatToolbarModule, MatButtonModule, MatProgressSpinnerModule, MatPaginatorModule],
+  exports: [HeaderComponent, FormButtonComponent, SnackbarComponent, PaginatorComponent, ControlErrorPipe],
 })
 export class SharedModule {}

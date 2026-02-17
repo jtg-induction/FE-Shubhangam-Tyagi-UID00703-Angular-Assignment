@@ -50,6 +50,16 @@ module.exports = defineConfig([
           style: 'kebab-case',
         },
       ],
+       '@typescript-eslint/no-explicit-any': 'warn',
+      '@typescript-eslint/no-unused-vars': [
+        'warn',
+        { 
+          argsIgnorePattern: '^_',
+          varsIgnorePattern: '^_',
+          caughtErrorsIgnorePattern: '^_'
+        }
+      ],
+      'import/no-unresolved': 'error',
       '@typescript-eslint/no-explicit-any': 'warn',
       'import/no-unresolved': 'error',
       'import/no-duplicates': 'error',

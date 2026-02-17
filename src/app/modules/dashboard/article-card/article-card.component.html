@@ -1,0 +1,26 @@
+<mat-card class="article-card" (click)="handleArticleClick(article)">
+  <mat-card-header>
+    <!-- Author Name & Publication Date -->
+    <mat-card-title class="article-card-title">{{ article.title }}</mat-card-title>
+    <mat-card-subtitle> By {{ article.author }} • {{ article.createdAt | date: 'mediumDate' }} </mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content class="article-card-content">
+    <!-- Short Description and Featured article image -->
+    <img mat-image [src]="article.image" class="article-image" alt="img" />
+    <p>{{ article.shortDescription }}</p>
+
+    <!-- Tags using Chips -->
+    <mat-chip-set aria-label="Article tags" class="tag-chip-set">
+      <!-- only first 5 tags display -->
+      @for (item of article.tags | slice: 0 : 5; track $index) {
+        <mat-chip color="primary">
+          {{ item }}
+        </mat-chip>
+      }
+      @if (article.tags.length > 5) {
+        <mat-chip color="primary"> +{{ article.tags.length - 5 }} more </mat-chip>
+      }
+    </mat-chip-set>
+  </mat-card-content>
+</mat-card>
