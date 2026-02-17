@@ -15,3 +15,25 @@ $primary-color: rgb(95 177 205);
 $primary-error-color: red;
 $secondary-error-color: rgb(0 0 0);
 $text-light: rgb(179 68 86);
+
+/*
+* Variables for breakpoints
+*/
+$mobile-landscape: 568px;
+$tablet: 768px;
+$desktop: 992px;
+
+/*
+* Map for breakpoints
+*/
+$breakpoints: (
+  'small': (
+    min-width: $mobile-landscape,
+  ),
+  'medium': (
+    min-width: $tablet,
+  ),
+  'large': (
+    min-width: $desktop,
+  ),
+);

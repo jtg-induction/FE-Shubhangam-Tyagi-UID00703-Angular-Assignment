@@ -1,10 +1,15 @@
+@use 'abstracts' as *;
+
 .snackbar-wrap {
   position: fixed;
-  top: 20px;
-  right: 20px;
-  padding: 20px;
-  border-radius: 5px;
-  min-width: 20%;
+  top: rem(20);
+  padding: rem(20);
+  border-radius: rem(5);
+  width: 100%;
+  max-width: rem(400);
+  left: 0;
+  right: 0;
+  margin: 0 auto;
 
   &.success {
     background: rgb(0 173 72);
@@ -16,8 +21,19 @@
 
   .snackbar-text {
     text-align: center;
-    font-size: 1.3em;
+    font-size: rem(16);
     color: white;
     margin: 0;
+  }
+
+  @include responsive('medium') {
+    width: auto;
+    min-width: rem(300);
+    right: rem(20);
+    left: auto;
+  }
+
+  @include responsive('large') {
+    min-width: rem(350);
   }
 }
