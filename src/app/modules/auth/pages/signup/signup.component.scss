@@ -12,8 +12,6 @@
   max-width: rem(400); // Caps width at 400px on desktop
   padding: rem(20);
   border-radius: 20px;
-
-  @include for-phone-only;
 }
 
 .full-width {
