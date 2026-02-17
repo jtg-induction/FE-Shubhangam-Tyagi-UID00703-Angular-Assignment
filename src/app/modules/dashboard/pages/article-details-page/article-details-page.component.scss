@@ -19,12 +19,8 @@
   max-height: rem(400);
 }
 
-.bi {
-  width: 100%;
-}
-
 .title {
-  font-size: rem(35);
+  font-size: rem(30);
   margin: rem(16) 0 rem(8);
   font-weight: 750;
   line-height: 1.8;
@@ -51,15 +47,9 @@
   font-size: rem(14);
 }
 
-.summary {
-  font-size: rem(18);
-  font-weight: 500;
-  border-left: 4px solid #007bff;
-  padding-left: rem(16);
-}
-
 .body-text p {
   margin-bottom: rem(24);
+  font-size: medium;
 }
 
 .article-footer {
@@ -68,8 +58,8 @@
   border-top: 1px solid #eee;
 }
 
-@include responsive('small') {
+@include responsive('large') {
   .title {
-    font-size: rem(30);
+    font-size: rem(40);
   }
 }

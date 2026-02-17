@@ -28,8 +28,10 @@ export class ArticleDetailsPageComponent implements OnInit {
             this.article = res;
           },
           error: error => {
-            this.notificationService.showError(error.error.message);
-            this.router.navigate(['/dashboard']);
+            if (error.status !== 401) {
+              this.notificationService.showError(error.error.message);
+              this.router.navigate(['/dashboard']);
+            }
           },
         });
     });

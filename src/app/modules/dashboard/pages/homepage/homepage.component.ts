@@ -52,7 +52,9 @@ export class HomepageComponent implements OnInit {
           this.isLoading = false;
         },
         error: error => {
-          this.notificationService.showError(error.error.message);
+          if (error.status !== 401) {
+            this.notificationService.showError(error.error.message);
+          }
         },
       });
   }
