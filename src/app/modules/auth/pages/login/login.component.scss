@@ -13,7 +13,7 @@
   padding: rem(20);
   border-radius: 20px;
 
-  @media (width <= 480px) {
+  @include responsive('small') {
     margin: rem(20) auto;
     padding: rem(16);
     box-shadow: none; // flat look on mobile
