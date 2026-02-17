@@ -1,4 +1,5 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, DestroyRef, inject, OnInit } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { PageEvent } from '@angular/material/paginator';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { ArticleService } from '@core/services/article.service';
@@ -21,8 +22,9 @@ export class HomepageComponent implements OnInit {
   route = inject(ActivatedRoute);
   notificationService = inject(NotificationService);
   searchText?: string;
+  destroyRef = inject(DestroyRef);
   ngOnInit(): void {
-    this.route.queryParams.subscribe(params => {
+    this.route.queryParams.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(params => {
       this.pageIndex = +params['page'];
       this.pageSize = +params['pageSize'] || 10; // + converting string to number
       this.searchText = params['search'] || '';
@@ -39,17 +41,20 @@ export class HomepageComponent implements OnInit {
   }
 
   fetchArticles(params: Params) {
-    this.articleService.getAllArticles(params).subscribe({
-      next: resp => {
-        this.articles = resp?.data;
-        this.totalArticles = resp?.totalItems;
-        this.pageIndex = resp?.currentPage - 1;
-        this.isLoading = false;
-      },
-      error: error => {
-        this.notificationService.showError(error.error.message);
-      },
-    });
+    this.articleService
+      .getAllArticles(params)
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe({
+        next: resp => {
+          this.articles = resp?.data;
+          this.totalArticles = resp?.totalItems;
+          this.pageIndex = resp?.currentPage - 1;
+          this.isLoading = false;
+        },
+        error: error => {
+          this.notificationService.showError(error.error.message);
+        },
+      });
   }
 
   handlePageChanged(pageEvent: PageEvent) {

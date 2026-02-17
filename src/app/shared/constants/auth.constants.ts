@@ -1,4 +1,3 @@
 export const AuthMessages = {
-  emailOrUsernameAlreadyExists: 'This username or email already exists',
-  unexpectedErrorMessage: 'An Unexpected error occured. Please try again',
+  UNEXPECTED_ERROR_MESSAGE: 'An Unexpected error occured. Please Login Again',
 } as const; // read only

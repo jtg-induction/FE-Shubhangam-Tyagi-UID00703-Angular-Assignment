@@ -1,7 +1,6 @@
 import { Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { SignupRequest } from '@shared/models/signup.request.model';
 import { AuthService } from '@core/services/auth.service';
@@ -20,7 +19,6 @@ export class SignupComponent implements OnInit {
   authService: AuthService = inject(AuthService);
   tokenService: TokenService = inject(TokenService);
   router: Router = inject(Router);
-  obs!: Subscription;
   isLoading = false;
   showPass = false;
   showConfirmPass = false;

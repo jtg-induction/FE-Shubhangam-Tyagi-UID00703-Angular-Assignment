@@ -2,19 +2,21 @@
 
 .article-container {
   max-width: 100%;
-  margin: 2rem auto;
+  margin: rem(20);
   line-height: 1.8;
-  padding: 0 20px;
+  padding: rem(20);
   color: white;
+  background: none;
 }
 
 .me {
   height: auto;
+  border-radius: 20px;
 }
 
 .lf {
   max-width: 100%;
-  max-height: 200px;
+  max-height: rem(400);
 }
 
 .bi {
@@ -22,52 +24,52 @@
 }
 
 .title {
-  font-size: 2.5rem;
-  margin: 1rem 0 0.5rem;
+  font-size: rem(35);
+  margin: rem(16) 0 rem(8);
   font-weight: 750;
   line-height: 1.8;
 }
 
 .details {
   display: flex;
-  gap: 15px;
-  font-size: 0.9rem;
-  margin-bottom: 1.5rem;
+  gap: rem(15);
+  font-size: rem(15);
+  margin-bottom: rem(24);
 }
 
 .tag-list {
   display: flex;
-  gap: 8px;
+  gap: rem(8);
   flex-wrap: wrap;
-  margin-bottom: 2rem;
+  margin-bottom: rem(32);
 }
 
 .tag {
   background: #f0f0f0;
-  padding: 4px 12px;
+  padding: rem(4) rem(12);
   border-radius: 20px;
-  font-size: 0.8rem;
+  font-size: rem(14);
 }
 
 .summary {
-  font-size: 1.2rem;
+  font-size: rem(18);
   font-weight: 500;
   border-left: 4px solid #007bff;
-  padding-left: 1rem;
+  padding-left: rem(16);
 }
 
 .body-text p {
-  margin-bottom: 1.5rem;
+  margin-bottom: rem(24);
 }
 
 .article-footer {
-  margin-top: 3rem;
-  padding-top: 1rem;
+  margin-top: rem(48);
+  padding-top: rem(16);
   border-top: 1px solid #eee;
 }
 
-@media (width <= 350px) {
+@include responsive('small') {
   .title {
-    font-size: 30px;
+    font-size: rem(30);
   }
 }

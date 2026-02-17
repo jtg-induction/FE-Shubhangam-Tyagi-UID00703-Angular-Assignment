@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '@core/services/auth.service';
 import { TokenService } from '@core/services/token.service';
 import { NotificationService } from '@core/services/notification.service';
+import { AuthMessages } from '@shared/constants/auth.constants';
 
 /**
  * Interceptor for intercepting API requests
@@ -31,7 +32,7 @@ export class AuthInterceptor implements HttpInterceptor {
       catchError(error => {
         if (error.status === 401) {
           this.tokenService.deleteToken();
-          this.notificationService.showError(error.error.message);
+          this.notificationService.showError(AuthMessages.UNEXPECTED_ERROR_MESSAGE);
           this.router.navigate(['/auth/login']);
         }
         return throwError(() => error);

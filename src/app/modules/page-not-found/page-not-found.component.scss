@@ -1,21 +1,22 @@
-@use 'abstracts' as abs;
+@use 'abstracts' as *;
 
 .not-found {
-  @include abs.flex-center-column;
+  @include flex-container(column, center);
 
+  align-items: center;
   height: 100vh;
   text-align: center;
 
   &__error-code {
-    font-size: abs.rem(128);
+    font-size: rem(128);
     font-weight: 900;
-    color: abs.$primary-error-color;
+    color: $primary-error-color;
     margin: 0;
   }
 
   &__message {
-    font-size: abs.rem(24);
-    margin: abs.rem(32);
-    color: abs.$secondary-error-color;
+    font-size: rem(24);
+    margin: rem(32);
+    color: $secondary-error-color;
   }
 }
