@@ -1,14 +1,26 @@
 @use 'abstracts' as *;
 
-.search-field {
-  max-width: rem(400);
-  overflow: hidden;
+.search-box {
+  display: flex;
+  align-items: center;
+  width: 100%;
   border-radius: 20px;
+  overflow: hidden;
+  background-color: white;
+  padding-left: rem(20);
 }
 
-.mat-mdc-form-field {
-  border-radius: 40px;
+.search-input {
   width: 100%;
+  padding: rem(15);
+  border: none;
+  border-radius: 20px;
+  font-size: medium;
+  font-weight: 500;
 
-  --mdc-filled-text-field-container-color: white !important;
+  &:focus {
+    border: none;
+    outline: none;
+    box-shadow: none;
+  }
 }

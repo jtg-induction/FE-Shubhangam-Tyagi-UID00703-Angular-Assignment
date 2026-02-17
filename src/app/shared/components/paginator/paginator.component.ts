@@ -14,8 +14,6 @@ export class PaginatorComponent {
   pageSizeOptions = [5, 10, 15, 20, 25];
 
   getServerData(event: PageEvent) {
-    console.log('from event');
-    console.log(event);
     this.pageChanged.emit(event);
   }
 }

@@ -1,6 +1,6 @@
-import { Component, inject, OnDestroy, OnInit } from '@angular/core';
+import { Component, DestroyRef, inject, OnInit } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
 import { AuthService } from '@core/services/auth.service';
 
 @Component({
@@ -8,13 +8,13 @@ import { AuthService } from '@core/services/auth.service';
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })
-export class HeaderComponent implements OnInit, OnDestroy {
+export class HeaderComponent implements OnInit {
   authService: AuthService = inject(AuthService);
   isLoggedIn!: boolean;
   router: Router = inject(Router);
-  private userTokenSubject!: Subscription;
+  private destroyRef = inject(DestroyRef);
   ngOnInit(): void {
-    this.userTokenSubject = this.authService.userToken.subscribe(token => {
+    this.authService.userToken.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(token => {
       this.isLoggedIn = !token || token !== '';
     });
   }
@@ -22,8 +22,5 @@ export class HeaderComponent implements OnInit, OnDestroy {
   handleLogout() {
     this.authService.logout();
     this.router.navigate(['/auth/login']);
-  }
-  ngOnDestroy(): void {
-    this.userTokenSubject.unsubscribe();
   }
 }

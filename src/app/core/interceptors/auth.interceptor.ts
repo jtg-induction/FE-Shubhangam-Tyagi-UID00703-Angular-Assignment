@@ -1,5 +1,5 @@
 import { HttpEvent, HttpHandler, HttpHeaders, HttpInterceptor, HttpRequest } from '@angular/common/http';
-import { inject, Injectable } from '@angular/core';
+import { inject } from '@angular/core';
 import { catchError, exhaustMap, Observable, take, throwError } from 'rxjs';
 import { Router } from '@angular/router';
 import { AuthService } from '@core/services/auth.service';
@@ -9,7 +9,7 @@ import { NotificationService } from '@core/services/notification.service';
 /**
  * Interceptor for intercepting API requests
  */
-@Injectable()
+
 export class AuthInterceptor implements HttpInterceptor {
   authService: AuthService = inject(AuthService);
   tokenService: TokenService = inject(TokenService);

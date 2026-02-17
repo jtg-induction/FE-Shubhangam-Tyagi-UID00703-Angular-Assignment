@@ -1,8 +1,8 @@
 @use 'abstracts' as *;
 
 .article-card {
-  max-width: rem(500);
-  margin: rem(16);
+  max-width: rem(600);
+  margin-top: rem(16);
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -10,12 +10,12 @@
     transform 0.2s ease-in-out,
     box-shadow 0.2s ease-in-out;
   border-radius: 20px;
-}
 
-.article-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 16px rgb(0 0 0 / 20%);
-  cursor: pointer;
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 16px rgb(0 0 0 / 20%);
+    cursor: pointer;
+  }
 }
 
 .article-image {
@@ -26,40 +26,17 @@
   margin-bottom: rem(16);
 }
 
-mat-card-title {
+.article-card-title {
   font-size: 1.25rem;
   line-height: 1.4;
   margin-bottom: rem(5) !important;
 }
 
-mat-card-content {
+.article-card-content {
   flex-grow: 1;
   padding-top: rem(16);
 }
 
-mat-chip-set {
+.tag-chip-set {
   margin-top: rem(12);
-}
-
-@media (width <= 600px) {
-  .article-card {
-    max-width: 100%;
-    margin: rem(5);
-  }
-
-  .article-image {
-    height: rem(180);
-  }
-
-  mat-card-title {
-    font-size: 1.1rem;
-  }
-
-  mat-card-actions {
-    padding: rem(16) !important;
-  }
-
-  mat-card-actions button {
-    width: 100%;
-  }
 }
