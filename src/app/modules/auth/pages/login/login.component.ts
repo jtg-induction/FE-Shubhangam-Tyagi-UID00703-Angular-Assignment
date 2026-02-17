@@ -45,7 +45,7 @@ export class LoginComponent implements OnInit {
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
         next: () => {
-          this.router.navigate(['/dashboard']);
+          this.router.navigate(['/articles']);
         },
         error: error => {
           this.errorMessage = error.error.message;

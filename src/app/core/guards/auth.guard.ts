@@ -12,7 +12,7 @@ export const authGuard = (route: ActivatedRouteSnapshot, state: RouterStateSnaps
       const isLoggedIn = !!token || token !== '';
       if (isLoggedIn) {
         if (isAuthPage) {
-          return router.createUrlTree(['/dashboard']);
+          return router.createUrlTree(['/articles']);
         }
         return true;
       } else {

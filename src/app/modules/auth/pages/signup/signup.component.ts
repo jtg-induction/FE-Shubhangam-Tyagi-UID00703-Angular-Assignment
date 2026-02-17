@@ -71,7 +71,7 @@ export class SignupComponent implements OnInit {
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
         next: resp => {
-          this.router.navigate(['/dashboard']);
+          this.router.navigate(['/articles']);
           this.tokenService.saveToken(resp.data.token);
         },
         error: error => {

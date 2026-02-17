@@ -30,7 +30,7 @@ export class ArticleDetailsPageComponent implements OnInit {
           error: error => {
             if (error.status !== 401) {
               this.notificationService.showError(error.error.message);
-              this.router.navigate(['/dashboard']);
+              this.router.navigate(['/articles']);
             }
           },
         });

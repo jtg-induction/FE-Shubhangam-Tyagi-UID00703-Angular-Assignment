@@ -8,9 +8,9 @@ const routes: Routes = [
     path: '',
     component: MainLayoutComponent,
     children: [
-      { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+      { path: '', redirectTo: 'articles', pathMatch: 'full' },
       { path: 'auth', loadChildren: () => import('@modules/auth/auth.module').then(m => m.AuthModule) },
-      { path: 'dashboard', loadChildren: () => import('@modules/dashboard/dashboard.module').then(m => m.DashboardModule) },
+      { path: 'articles', loadChildren: () => import('@modules/dashboard/dashboard.module').then(m => m.DashboardModule) },
     ],
     canActivate: [authGuard],
   },
