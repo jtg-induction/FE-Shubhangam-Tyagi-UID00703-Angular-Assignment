@@ -65,7 +65,6 @@ export class SignupComponent implements OnInit, OnDestroy {
         this.isLoading = false;
       },
       complete: () => {
-        console.log('completed');
         this.isLoading = false;
         this.router.navigate(['../login']);
       },
