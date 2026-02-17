@@ -10,12 +10,12 @@
     transform 0.2s ease-in-out,
     box-shadow 0.2s ease-in-out;
   border-radius: 20px;
-}
 
-.article-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 16px rgb(0 0 0 / 20%);
-  cursor: pointer;
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 16px rgb(0 0 0 / 20%);
+    cursor: pointer;
+  }
 }
 
 .article-image {
