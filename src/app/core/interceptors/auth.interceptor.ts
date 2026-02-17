@@ -1,11 +1,11 @@
 import { HttpEvent, HttpHandler, HttpHeaders, HttpInterceptor, HttpRequest } from '@angular/common/http';
-import { inject, Injectable } from '@angular/core';
+import { inject } from '@angular/core';
 import { exhaustMap, Observable, take } from 'rxjs';
 import { AuthService } from '@core/services/auth.service';
 /**
  * Interceptor for intercepting API requests
  */
-@Injectable()
+
 export class AuthInterceptor implements HttpInterceptor {
   authService: AuthService = inject(AuthService);
   intercept(req: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {

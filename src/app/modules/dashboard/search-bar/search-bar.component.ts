@@ -1,26 +1,23 @@
-import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
-import { debounceTime, distinctUntilChanged, Subject, Subscription } from 'rxjs';
+import { Component, DestroyRef, EventEmitter, inject, Input, OnInit, Output } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { debounceTime, distinctUntilChanged, Subject } from 'rxjs';
 @Component({
   selector: 'app-search-bar',
   templateUrl: './search-bar.component.html',
   styleUrl: './search-bar.component.scss',
 })
-export class SearchBarComponent implements OnInit, OnDestroy {
+export class SearchBarComponent implements OnInit {
+  @Input() searchText?: string;
   @Output() searchChanged = new EventEmitter<string>();
   private searchSubject = new Subject<string>();
-  private searchSubscription?: Subscription;
+  private destroyRef = inject(DestroyRef);
 
   ngOnInit(): void {
-    this.searchSubscription = this.searchSubject.pipe(debounceTime(500), distinctUntilChanged()).subscribe(value => {
+    this.searchSubject.pipe(debounceTime(500), distinctUntilChanged(), takeUntilDestroyed(this.destroyRef)).subscribe(value => {
       this.searchChanged.emit(value);
     });
   }
   handleSearch(input: string) {
-    console.log('');
     this.searchSubject.next(input);
-  }
-
-  ngOnDestroy(): void {
-    this.searchSubscription?.unsubscribe();
   }
 }

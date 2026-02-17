@@ -9,8 +9,7 @@ import { Article } from '@shared/models/article.model';
 export class ArticleCardComponent {
   @Input() article!: Article;
 
-  handleArticleClick(article: Article) {
+  handleArticleClick(_article: Article) {
     // Handle here for viewing article detail of clicked article
-    console.log(article);
   }
 }

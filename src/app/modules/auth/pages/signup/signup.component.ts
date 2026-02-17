@@ -3,11 +3,10 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { SignupRequest } from '@shared/models/signup.request.model';
 import { AuthService } from '@core/services/auth.service';
 import { PasswordValidator } from '@modules/auth/validators/password.validator';
 import { TokenService } from '@core/services/token.service';
-import { SignupRequest } from '@shared/models/signup.request.model';
-import { NotificationService } from '@core/services/notification.service';
 
 @Component({
   selector: 'app-signup',
@@ -25,7 +24,6 @@ export class SignupComponent implements OnInit {
   isLoading = false;
   showPass = false;
   showConfirmPass = false;
-  notificationService = inject(NotificationService);
   private destroyRef = inject(DestroyRef);
   ngOnInit(): void {
     this.setupForm();

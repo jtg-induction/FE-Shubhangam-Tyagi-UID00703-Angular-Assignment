@@ -2,6 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { ArticleService } from '@core/services/article.service';
+import { NotificationService } from '@core/services/notification.service';
 import { Article } from '@shared/models/article.model';
 
 @Component({
@@ -18,10 +19,13 @@ export class HomepageComponent implements OnInit {
   pageIndex?: number;
   router = inject(Router);
   route = inject(ActivatedRoute);
+  notificationService = inject(NotificationService);
+  searchText?: string;
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
       this.pageIndex = +params['page'];
       this.pageSize = +params['pageSize'] || 10; // + converting string to number
+      this.searchText = params['search'] || '';
       this.fetchArticles(params);
     });
   }
@@ -43,7 +47,7 @@ export class HomepageComponent implements OnInit {
         this.isLoading = false;
       },
       error: error => {
-        console.log(error);
+        this.notificationService.showError(error.error.message);
       },
     });
   }

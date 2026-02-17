@@ -1,21 +1,19 @@
-import { Component, inject, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Component, inject } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { NotificationService } from '@core/services/notification.service';
-
 @Component({
   selector: 'app-snackbar',
   templateUrl: './snackbar.component.html',
   styleUrl: './snackbar.component.scss',
 })
-export class SnackbarComponent implements OnInit, OnDestroy {
+export class SnackbarComponent {
   show = false;
   message!: string;
   type!: string;
-  private snackbarSubscription?: Subscription;
   notitficationService: NotificationService = inject(NotificationService);
 
-  ngOnInit() {
-    this.snackbarSubscription = this.notitficationService.snackbarState.subscribe(state => {
+  constructor() {
+    this.notitficationService.snackbarState.pipe(takeUntilDestroyed()).subscribe(state => {
       if (state.type) {
         this.type = state.type;
       } else {
@@ -27,9 +25,5 @@ export class SnackbarComponent implements OnInit, OnDestroy {
         this.show = false;
       }, 3000);
     });
-  }
-
-  ngOnDestroy() {
-    this.snackbarSubscription?.unsubscribe();
   }
 }
