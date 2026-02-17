@@ -18,6 +18,9 @@
           {{ item }}
         </mat-chip>
       }
+      @if (article.tags.length > 5) {
+        <mat-chip color="primary"> +{{ article.tags.length - 5 }} more </mat-chip>
+      }
     </mat-chip-set>
   </mat-card-content>
 </mat-card>
