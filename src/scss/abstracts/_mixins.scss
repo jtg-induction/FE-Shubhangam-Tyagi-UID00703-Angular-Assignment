@@ -1,7 +1,24 @@
+/* stylelint-disable no-invalid-position-declaration */
 @use 'variables' as vars;
+@use 'functions' as func;
+@use 'sass:map';
 
-@mixin flex-center {
+@mixin flex-center-column {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
+}
+
+@mixin responsive($size) {
+  $query: map.get(vars.$breakpoints, $size);
+  $value: map.get($query, 'min-width');
+
+  @if $query {
+    @media (min-width: #{$value}) {
+      @content;
+    }
+  } @else {
+    @error "No breakpoint found for `#{$size}`.";
+  }
 }

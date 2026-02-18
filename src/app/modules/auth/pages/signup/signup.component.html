@@ -1,0 +1,40 @@
+<div class="signup-page">
+  <mat-card class="signup-card">
+    <mat-card-header>
+      <h2 class="form-title">Create Account</h2>
+    </mat-card-header>
+    <form [formGroup]="signupForm" (submit)="handleSubmit()" class="auth-form">
+      <mat-form-field class="full-width">
+        <mat-label>Username</mat-label>
+        <input matInput placeholder="Enter Username" formControlName="username" />
+        <mat-error>{{ signupForm.get('username') | controlError: 'Username' }}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <mat-label>Email</mat-label>
+        <input matInput placeholder="Enter Email" formControlName="email" />
+        <mat-error>{{ signupForm.get('email') | controlError: 'Email' }}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <mat-label>Password</mat-label>
+        <input matInput placeholder="Enter Password" formControlName="password" type="password" />
+        <mat-error>{{ signupForm.get('password') | controlError: 'Password' }}</mat-error>
+      </mat-form-field>
+      <mat-form-field class="full-width">
+        <mat-label>Confirm Password</mat-label>
+        <input type="password" matInput placeholder="Enter Password" formControlName="confirmPassword" />
+
+        <mat-error>{{ signupForm.get('confirmPassword') | controlError: 'ConfirmPassword' }}</mat-error>
+      </mat-form-field>
+      <app-form-button
+        [type]="'submit'"
+        [color]="'primary'"
+        [isDisabled]="!signupForm.valid"
+        [text]="'Signup'"
+        class="full-width"
+        [isLoading]="isLoading"></app-form-button>
+      <p class="auth-redirect">Already Have an Account? <a routerLink="../login">Login</a></p>
+    </form>
+  </mat-card>
+</div>

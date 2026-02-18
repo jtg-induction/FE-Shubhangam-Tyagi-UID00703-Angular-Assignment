@@ -1,0 +1,8 @@
+<button mat-raised-button [color]="color" class="form-btn" [type]="type" [disabled]="isDisabled || isLoading">
+  <span class="btn-wrapper">
+    @if (isLoading) {
+      <mat-spinner diameter="20" class="btn-spinner"></mat-spinner>
+    }
+    <span class="btn-text">{{ text }}</span>
+  </span>
+</button>

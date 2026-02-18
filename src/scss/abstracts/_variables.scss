@@ -13,5 +13,27 @@ $fs-3xl: 2rem;
 $bg-color: #0b2d72;
 $primary-color: rgb(95 177 205);
 $primary-error-color: red;
-$text-error-secondary: yellow;
+$secondary-error-color: rgb(0 0 0);
 $text-light: rgb(179 68 86);
+
+/*
+* Variables for breakpoints
+*/
+$mobile-landscape: 568px;
+$tablet: 768px;
+$desktop: 992px;
+
+/*
+* Map for breakpoints
+*/
+$breakpoints: (
+  'small': (
+    min-width: $mobile-landscape,
+  ),
+  'medium': (
+    min-width: $tablet,
+  ),
+  'large': (
+    min-width: $desktop,
+  ),
+);
