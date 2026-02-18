@@ -18,12 +18,15 @@
 
       <mat-form-field class="full-width">
         <mat-label>Password</mat-label>
-        <input matInput placeholder="Enter Password" formControlName="password" type="password" />
+        <input matInput placeholder="Enter Password" formControlName="password" type="{{ !showPass ? 'password' : 'text' }}" />
+        <mat-icon matSuffix (click)="togglePasswordShow()">{{ !showPass ? 'visibility_off' : 'visibility' }}</mat-icon>
+
         <mat-error>{{ signupForm.get('password') | controlError: 'Password' }}</mat-error>
       </mat-form-field>
       <mat-form-field class="full-width">
         <mat-label>Confirm Password</mat-label>
-        <input type="password" matInput placeholder="Enter Password" formControlName="confirmPassword" />
+        <input type="{{ !showConfirmPass ? 'password' : 'text' }}" matInput placeholder="Enter Confirm Password" formControlName="confirmPassword" />
+        <mat-icon matSuffix (click)="toggleConfirmPasswordShow()">{{ !showConfirmPass ? 'visibility_off' : 'visibility' }}</mat-icon>
 
         <mat-error>{{ signupForm.get('confirmPassword') | controlError: 'ConfirmPassword' }}</mat-error>
       </mat-form-field>
@@ -35,6 +38,10 @@
         class="full-width"
         [isLoading]="isLoading"></app-form-button>
       <p class="auth-redirect">Already Have an Account? <a routerLink="../login">Login</a></p>
+      <!-- displaying error message for unauthenticated user-->
+      @if (errorMessage) {
+        <mat-error>{{ errorMessage }}</mat-error>
+      }
     </form>
   </mat-card>
 </div>

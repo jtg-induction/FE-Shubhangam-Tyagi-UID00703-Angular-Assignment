@@ -1,19 +1,19 @@
-import { Component, inject, OnDestroy, OnInit } from '@angular/core';
+import { Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { SignupRequest } from '@shared/models/signup.request.model';
 import { AuthService } from '@core/services/auth.service';
 import { PasswordValidator } from '@modules/auth/validators/password.validator';
 import { TokenService } from '@core/services/token.service';
-import { NotificationService } from '@core/services/notification.service';
-import { SignupRequest } from '@shared/models/signup.request.model';
 
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.scss',
 })
-export class SignupComponent implements OnInit, OnDestroy {
+export class SignupComponent implements OnInit {
   title = 'Signup';
   errorMessage = '';
   signupForm!: FormGroup;
@@ -21,9 +21,10 @@ export class SignupComponent implements OnInit, OnDestroy {
   tokenService: TokenService = inject(TokenService);
   router: Router = inject(Router);
   obs!: Subscription;
-  notificationService = inject(NotificationService);
   isLoading = false;
-
+  showPass = false;
+  showConfirmPass = false;
+  private destroyRef = inject(DestroyRef);
   ngOnInit(): void {
     this.setupForm();
   }
@@ -43,6 +44,20 @@ export class SignupComponent implements OnInit, OnDestroy {
       },
       { validators: [PasswordValidator.confirmPassword] } // form group level validator
     );
+
+    this.signupForm
+      .get('password')
+      ?.valueChanges.pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(() => {
+        this.showPass = false;
+      });
+
+    this.signupForm
+      .get('confirmPassword')
+      ?.valueChanges.pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(() => {
+        this.showConfirmPass = false;
+      });
   }
 
   handleSubmit() {
@@ -53,25 +68,29 @@ export class SignupComponent implements OnInit, OnDestroy {
       email: formData.email,
       password: formData.password,
     };
-
-    this.obs = this.authService.signup(signupRequest).subscribe({
-      next: resp => {
-        this.tokenService.saveToken(resp.data.token);
-        this.notificationService.showSuccess(resp.message);
-      },
-      error: error => {
-        this.errorMessage = error.error.message;
-        this.notificationService.showError(this.errorMessage);
-        this.isLoading = false;
-      },
-      complete: () => {
-        this.isLoading = false;
-        this.router.navigate(['../login']);
-      },
-    });
+    this.authService
+      .signup(signupRequest)
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe({
+        next: resp => {
+          this.router.navigate(['/dashboard']);
+          this.tokenService.saveToken(resp.data.token);
+        },
+        error: error => {
+          this.errorMessage = error.error.message;
+          this.isLoading = false;
+        },
+        complete: () => {
+          this.isLoading = false;
+          this.errorMessage = '';
+        },
+      });
   }
 
-  ngOnDestroy(): void {
-    this.obs.unsubscribe();
+  togglePasswordShow() {
+    this.showPass = !this.showPass;
+  }
+  toggleConfirmPasswordShow() {
+    this.showConfirmPass = !this.showConfirmPass;
   }
 }
