@@ -11,6 +11,7 @@ export class MainLayoutComponent implements OnInit {
   authService: AuthService = inject(AuthService);
   destroyRef = inject(DestroyRef);
   isLoggedIn = false;
+
   ngOnInit(): void {
     this.authService.userToken.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(token => {
       this.isLoggedIn = !!token || token !== '';

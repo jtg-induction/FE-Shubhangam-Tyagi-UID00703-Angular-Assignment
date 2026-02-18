@@ -26,3 +26,9 @@
 
   @include flex-container(row, flex-end, center);
 }
+
+.loading-message {
+  margin: rem(30);
+  color: white;
+  font-size: x-large;
+}

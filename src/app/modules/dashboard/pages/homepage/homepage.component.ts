@@ -14,7 +14,7 @@ import { Article } from '@shared/models/article.model';
 export class HomepageComponent implements OnInit {
   articleService: ArticleService = inject(ArticleService);
   articles!: Article[];
-  isLoading = false;
+  isLoading = true;
   totalArticles?: number;
   pageSize?: number;
   pageIndex?: number;
