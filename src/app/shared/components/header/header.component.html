@@ -1,7 +1,9 @@
-<mat-toolbar color="primary">
-  <span>Blog99</span>
-  <span class="spacer"></span>
-  @if (isLoggedIn) {
-    <button mat-raised-button color="accent" (click)="handleLogout()">Logout</button>
-  }
-</mat-toolbar>
+<div class="navbar">
+  <mat-toolbar>
+    <span>Blog99</span>
+    <span class="spacer"></span>
+    @if (isLoggedIn) {
+      <button mat-raised-button color="accent" (click)="handleLogout()">Logout</button>
+    }
+  </mat-toolbar>
+</div>

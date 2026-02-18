@@ -1,4 +1,4 @@
-<mat-card class="article-card" (click)="handleArticleClick(article)">
+<mat-card class="article-card" [routerLink]="[article.id]">
   <mat-card-header>
     <!-- Author Name & Publication Date -->
     <mat-card-title class="article-card-title">{{ article.title }}</mat-card-title>

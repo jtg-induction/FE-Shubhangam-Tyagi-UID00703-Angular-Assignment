@@ -1,0 +1,41 @@
+@if (article) {
+  <div class="article-container">
+    <!-- Header Section -->
+    <div class="article-header">
+      <img [src]="article.image" [alt]="article.title" class="article-image" />
+      <div class="meta-info">
+        <h1 class="title">{{ article.title }}</h1>
+        <div class="details">
+          <span
+            >By <strong>{{ article.author }}</strong></span
+          >
+          <time [attr.datetime]="article.createdAt">{{ article.createdAt | date: 'longDate' }}</time>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tags -->
+    <div class="tag-list">
+      @for (tag of article.tags; track $index) {
+        <mat-chip color="primary">
+          {{ tag }}
+        </mat-chip>
+      }
+    </div>
+
+    <!-- Content Section -->
+    <section class="content">
+      <div class="body-text">
+        <p>{{ article.description }}</p>
+      </div>
+    </section>
+
+    <!-- footer-section -->
+
+    <div class="article-footer">
+      <small>ID: {{ article.id }} | Updated: {{ article.updatedAt | date: 'short' }}</small>
+    </div>
+  </div>
+} @else {
+  <div class="loading-message">Loading........</div>
+}

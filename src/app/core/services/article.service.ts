@@ -3,7 +3,8 @@ import { inject, Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { ActivatedRoute, Params } from '@angular/router';
 import { environment } from '@environments/environment.development';
-import { ApiResponse } from '@shared/models/api.response';
+import { ApiResponse } from '@shared/models/api.response.model';
+import { ArticleResponse } from '@shared/models/article.response.model';
 import { API_PATHS } from '@shared/constants/path.constants';
 
 /**
@@ -27,6 +28,14 @@ export class ArticleService {
       fromObject: params,
     });
     return this.httpClient.get<ApiResponse>(`${this.apiUrl}${API_PATHS.allArticles}`, { params: reqParams }).pipe(
+      map(resp => {
+        return resp.data;
+      })
+    );
+  }
+
+  getArticleById(id: string) {
+    return this.httpClient.get<ArticleResponse>(`${this.apiUrl}${API_PATHS.allArticles}/${id}`).pipe(
       map(resp => {
         return resp.data;
       })

@@ -12,11 +12,12 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon'; // For <mat-icon>
 import { SharedModule } from '@shared/shared.module';
 import { DashboardRoutingModule } from './dashboard-routing.module';
-import { HomepageComponent } from './homepage/homepage.component';
-import { ArticleCardComponent } from './article-card/article-card.component';
-import { SearchBarComponent } from './search-bar/search-bar.component';
+import { HomepageComponent } from './pages/homepage/homepage.component';
+import { ArticleCardComponent } from './components/article-card/article-card.component';
+import { SearchBarComponent } from './components/search-bar/search-bar.component';
+import { ArticleDetailsPageComponent } from './pages/article-details-page/article-details-page.component';
 @NgModule({
-  declarations: [HomepageComponent, ArticleCardComponent, SearchBarComponent],
+  declarations: [HomepageComponent, ArticleDetailsPageComponent, ArticleCardComponent, SearchBarComponent],
   imports: [
     CommonModule,
     DashboardRoutingModule,

@@ -1,7 +1,7 @@
 @use 'abstracts' as *;
 
 .signup-page {
-  @include flex-center-column;
+  @include flex-container(column, center);
 
   min-height: 100vh;
   padding: rem(20);
@@ -19,9 +19,8 @@
 }
 
 .auth-form {
-  @include flex-center-column;
+  @include flex-container(column, center);
 
-  justify-content: space-between;
   padding: rem(20) 0; // Vertical padding only
   width: 100%;
 }
