@@ -3,7 +3,6 @@
 .not-found {
   @include flex-container(column, center);
 
-  align-items: center;
   height: 100vh;
   text-align: center;
 

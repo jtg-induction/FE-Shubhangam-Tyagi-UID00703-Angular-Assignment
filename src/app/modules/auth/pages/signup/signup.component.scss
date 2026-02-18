@@ -3,7 +3,6 @@
 .signup-page {
   @include flex-container(column, center);
 
-  align-items: center;
   min-height: 100vh;
   padding: rem(20);
 }
@@ -22,7 +21,6 @@
 .auth-form {
   @include flex-container(column, center);
 
-  align-items: center;
   padding: rem(20) 0; // Vertical padding only
   width: 100%;
 }

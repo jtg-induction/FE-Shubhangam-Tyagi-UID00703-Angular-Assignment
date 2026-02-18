@@ -9,14 +9,11 @@
   background: none;
 }
 
-.me {
-  height: auto;
-  border-radius: 20px;
-}
-
-.lf {
+.article-image {
   max-width: 100%;
   max-height: rem(400);
+  height: auto;
+  border-radius: 20px;
 }
 
 .title {

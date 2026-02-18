@@ -1,9 +1,8 @@
 @use 'abstracts' as *;
 
 .login-page {
-  @include flex-container(column, center);
+  @include flex-container(column, center, center);
 
-  align-items: center;
   min-height: 100vh;
   padding: rem(20);
 }
@@ -28,7 +27,6 @@
 .auth-form {
   @include flex-container(column);
 
-  align-items: center;
   padding: rem(20) 0; // Vertical padding only
   width: 100%;
 }
