@@ -71,10 +71,10 @@ module.exports = defineConfig([
             'builtin', // for node js core modules
             'external', // for external libraries installed,
             'internal', // for project codes,
-            'parent',
-            'sibling',
-            'index',
-            'type',
+            'parent', // for parent directories
+            'sibling', // for same folder
+            'index', // from current folder index
+            'type', // for type only
           ],
         },
       ],
