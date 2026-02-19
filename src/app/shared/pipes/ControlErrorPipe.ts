@@ -1,5 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
+import { ErrorParser } from '@shared/utils/error-parser';
 
 @Pipe({
   name: 'controlError',
@@ -10,16 +11,7 @@ export class ControlErrorPipe implements PipeTransform {
     if (!control || !control.errors || !control.touched) {
       return '';
     }
-
-    const errors = control.errors;
-
-    if (errors?.['required']) return `${label} is required`;
-    if (errors?.['email']) return 'Please enter a valid email';
-    if (errors?.['minlength']) return `Minimum ${errors['minlength'].requiredLength} characters required`;
-    if (errors?.['atLeastTwoDigitsRequired']) return 'Password must contain at least two digits';
-    if (errors?.['atLeastTwoSpecialChars']) return 'Atleast two special characters required';
-    if (errors?.['passwordNoMatch']) return 'Passwords do not match';
-
-    return '';
+    // const errors = control.errors ?? control.parent?.errors;
+    return ErrorParser.parse(control.errors, label);
   }
 }

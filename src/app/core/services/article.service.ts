@@ -1,11 +1,13 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { ActivatedRoute, Params } from '@angular/router';
-import { environment } from '@environments/environment.development';
+import { Observable } from 'rxjs';
 import { ApiResponse } from '@shared/models/api.response.model';
-import { ArticleResponse } from '@shared/models/article.response.model';
+import { ArticlesPaginated } from '@shared/models/allArticles.model';
 import { API_PATHS } from '@shared/constants/path.constants';
+import { Article } from '@shared/models/article.model';
+import { NetworkService } from './network.service';
 
 /**
  * Article Service
@@ -14,28 +16,27 @@ import { API_PATHS } from '@shared/constants/path.constants';
   providedIn: 'root',
 })
 export class ArticleService {
-  httpClient: HttpClient = inject(HttpClient);
   route: ActivatedRoute = inject(ActivatedRoute);
-  private apiUrl = environment.apiUrl;
+  network: NetworkService = inject(NetworkService);
 
   /**
    * Fetch All Articles
    * @param params all filtering params
    * @return {Observable}
    */
-  getAllArticles(params: Params) {
+  getAllArticles(params: Params): Observable<ArticlesPaginated> {
     const reqParams = new HttpParams({
       fromObject: params,
     });
-    return this.httpClient.get<ApiResponse>(`${this.apiUrl}${API_PATHS.allArticles}`, { params: reqParams }).pipe(
+    return this.network.get<ApiResponse<ArticlesPaginated>>(API_PATHS.allArticles, { params: reqParams }).pipe(
       map(resp => {
         return resp.data;
       })
     );
   }
 
-  getArticleById(id: string) {
-    return this.httpClient.get<ArticleResponse>(`${this.apiUrl}${API_PATHS.allArticles}/${id}`).pipe(
+  getArticleById(id: string): Observable<Article> {
+    return this.network.get<ApiResponse<Article>>(`${API_PATHS.allArticles}/${id}`).pipe(
       map(resp => {
         return resp.data;
       })

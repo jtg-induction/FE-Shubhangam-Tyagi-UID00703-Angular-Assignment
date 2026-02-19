@@ -1,11 +1,9 @@
-import { Component, DestroyRef, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { AuthService } from '@core/services/auth.service';
-import { TokenService } from '@core/services/token.service';
 import { PasswordValidator } from '@modules/auth/validators/password.validator';
-import { LoginRequest } from '@shared/models/login.request.model';
+import { AuthRequest } from '@shared/models/auth.request.model';
 
 @Component({
   selector: 'app-login',
@@ -17,60 +15,52 @@ export class LoginComponent implements OnInit {
   errorMessage = '';
   loginForm!: FormGroup;
   authService: AuthService = inject(AuthService);
-  tokenService: TokenService = inject(TokenService);
   router: Router = inject(Router);
   isLoading = false;
   show = false;
-  private destroyRef = inject(DestroyRef);
+
   ngOnInit(): void {
     this.setupForm();
-
-    this.loginForm
-      .get('password')
-      ?.valueChanges.pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe(() => {
-        this.show = false;
-      });
   }
 
   handleSubmit() {
     this.isLoading = true;
     const formData = this.loginForm.getRawValue();
-    const loginRequest: LoginRequest = {
+    const loginRequest: AuthRequest = {
       username: formData.username,
       password: formData.password,
     };
-    this.authService
-      .login(loginRequest)
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe({
-        next: () => {
-          this.router.navigate(['/articles']);
-        },
-        error: error => {
-          this.errorMessage = error.error.message;
-          this.isLoading = false;
-        },
-        complete: () => {
-          this.errorMessage = '';
-          this.isLoading = false;
-        },
-      });
+    this.authService.login(loginRequest).subscribe({
+      next: () => {
+        this.router.navigate(['/articles']);
+      },
+      error: error => {
+        this.errorMessage = error.error.message;
+        this.isLoading = false;
+      },
+      complete: () => {
+        this.errorMessage = '';
+        this.isLoading = false;
+      },
+    });
   }
 
   setupForm() {
     this.loginForm = new FormGroup({
-      username: new FormControl(null, [Validators.required]),
-      password: new FormControl(null, [
+      username: new FormControl('', [Validators.required]),
+      password: new FormControl('', [
         Validators.required,
         Validators.minLength(8),
         PasswordValidator.atLeastTwoDigitsRequired,
-        PasswordValidator.specialCharacterRequired,
+        PasswordValidator.atLeastTwoSpecialChars,
       ]),
     });
   }
 
   togglePasswordShow() {
     this.show = !this.show;
+  }
+  hidePass() {
+    this.show = false;
   }
 }

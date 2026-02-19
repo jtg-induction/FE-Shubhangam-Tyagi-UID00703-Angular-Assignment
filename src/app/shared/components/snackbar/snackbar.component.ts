@@ -23,7 +23,7 @@ export class SnackbarComponent {
       this.show = state.show;
       setTimeout(() => {
         this.show = false;
-      }, 3000);
+      }, state.duration);
     });
   }
 }

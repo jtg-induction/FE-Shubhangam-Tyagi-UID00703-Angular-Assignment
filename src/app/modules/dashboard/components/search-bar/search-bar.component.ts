@@ -10,13 +10,20 @@ export class SearchBarComponent implements OnInit {
   @Input() searchText?: string;
   @Output() searchChanged = new EventEmitter<string>();
   private searchSubject = new Subject<string>();
-  private destroyRef = inject(DestroyRef);
+  destroyRef: DestroyRef = inject(DestroyRef);
 
   ngOnInit(): void {
-    this.searchSubject.pipe(debounceTime(500), distinctUntilChanged(), takeUntilDestroyed(this.destroyRef)).subscribe(value => {
-      this.searchChanged.emit(value);
-    });
+    this.searchSubject
+      .pipe(
+        debounceTime(500),
+        distinctUntilChanged(), // Only emit if value is different
+        takeUntilDestroyed(this.destroyRef)
+      )
+      .subscribe(value => {
+        this.searchChanged.emit(value);
+      });
   }
+
   handleSearch(input: string) {
     this.searchSubject.next(input);
   }

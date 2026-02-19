@@ -12,11 +12,11 @@
       }
     </div>
 
-    <div class="main-content-footer">
+    <div class="paginator-container">
       <app-paginator
-        [pageNumber]="pageIndex"
-        [pageSize]="pageSize"
-        [totalItems]="totalArticles"
+        [pageNumber]="paginatorData.pageIndex"
+        [pageSize]="paginatorData.pageSize"
+        [totalItems]="paginatorData.totalArticles"
         (pageChanged)="handlePageChanged($event)"></app-paginator>
     </div>
   </div>

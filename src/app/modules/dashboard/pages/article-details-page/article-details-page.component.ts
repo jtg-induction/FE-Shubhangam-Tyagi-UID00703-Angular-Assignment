@@ -1,5 +1,4 @@
-import { Component, DestroyRef, inject, OnInit } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ArticleService } from '@core/services/article.service';
 import { NotificationService } from '@core/services/notification.service';
@@ -16,24 +15,21 @@ export class ArticleDetailsPageComponent implements OnInit {
   articleService = inject(ArticleService);
   notificationService = inject(NotificationService);
   article!: Article;
-  destroyRef = inject(DestroyRef);
 
   ngOnInit(): void {
+    this.fetchArticleDetails();
+  }
+
+  fetchArticleDetails() {
     this.activatedRoute.paramMap.subscribe(val => {
-      this.articleService
-        .getArticleById(val.get('id') || '')
-        .pipe(takeUntilDestroyed(this.destroyRef))
-        .subscribe({
-          next: res => {
-            this.article = res;
-          },
-          error: error => {
-            if (error.status !== 401) {
-              this.notificationService.showError(error.error.message);
-              this.router.navigate(['/articles']);
-            }
-          },
-        });
+      this.articleService.getArticleById(val.get('id') || '').subscribe({
+        next: res => {
+          this.article = res;
+        },
+        error: error => {
+          this.notificationService.showError(error.error.message, 5000);
+        },
+      });
     });
   }
 }

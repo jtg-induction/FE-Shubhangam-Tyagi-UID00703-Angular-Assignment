@@ -1,20 +1,17 @@
-import { Component, DestroyRef, inject, OnInit } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { AuthService } from '@core/services/auth.service';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-main-layout',
   templateUrl: './main-layout.component.html',
   styleUrl: './main-layout.component.scss',
 })
-export class MainLayoutComponent implements OnInit {
-  authService: AuthService = inject(AuthService);
-  destroyRef = inject(DestroyRef);
-  isLoggedIn = false;
+export class MainLayoutComponent {
+  isLoggedIn() {
+    const token = localStorage.getItem('Token');
+    if (token && token !== '') {
+      return true;
+    }
 
-  ngOnInit(): void {
-    this.authService.userToken.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(token => {
-      this.isLoggedIn = !!token || token !== '';
-    });
+    return false;
   }
 }

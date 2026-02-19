@@ -1,47 +1,32 @@
 import { AbstractControl, ValidationErrors } from '@angular/forms';
 
 export class PasswordValidator {
-  static atLeastTwoDigitsRequired(control: AbstractControl) {
-    const password = control.value?.toString() || '';
-    let cnt = 0;
-    for (const i of password) {
-      if (i >= '0' && i <= '9') {
-        cnt++;
-      }
-    }
-    if (cnt < 2) {
-      return { atLeastTwoDigitsRequired: true };
-    }
-    return null;
+  private static readonly TWO_DIGITS_REGEX = /(?:.*\d){2,}/;
+  private static readonly TWO_SPECIAL_REGEX = /(?:.*[!@#$%]){2,}/;
+
+  static atLeastTwoDigitsRequired(control: AbstractControl): ValidationErrors | null {
+    const value = control.value ?? '';
+
+    return PasswordValidator.TWO_DIGITS_REGEX.test(value) ? null : { atLeastTwoDigitsRequired: true };
   }
 
-  static specialCharacterRequired(control: AbstractControl) {
-    const password = control.value?.toString() || '';
-    const specialCharsArray = ['!', '@', '#', '$', '%'];
+  static atLeastTwoSpecialChars(control: AbstractControl): ValidationErrors | null {
+    const value = control.value ?? '';
 
-    // Convert to Set
-    const specialSet = new Set(specialCharsArray);
-    let count = 0;
-
-    for (const char of password) {
-      // Check if the current character is in the specialChars set
-      if (specialSet.has(char)) {
-        count++;
-      }
-      if (count >= 2) return null;
-    }
-
-    return { atLeastTwoSpecialChars: true };
+    return PasswordValidator.TWO_SPECIAL_REGEX.test(value) ? null : { atLeastTwoSpecialChars: true };
   }
 
   static confirmPassword(control: AbstractControl): ValidationErrors | null {
-    const password = control.get('password')?.value?.toString() || '';
-    const confirmPassword = control.get('confirmPassword')?.value?.toString() || '';
+    const password = control.get('password')?.value;
+    const confirmPassword = control.get('confirmPassword')?.value;
 
-    if (password && confirmPassword && password !== confirmPassword) {
-      control.get('confirmPassword')?.setErrors({ passwordNoMatch: true });
-      return { passwordNoMatch: true };
+    if (!password || !confirmPassword) {
+      return null;
     }
-    return null;
+    if (password === confirmPassword) {
+      return null;
+    }
+    control.get('confirmPassword')?.setErrors({ passwordNoMatch: true });
+    return password === confirmPassword ? null : { passwordNoMatch: true };
   }
 }
