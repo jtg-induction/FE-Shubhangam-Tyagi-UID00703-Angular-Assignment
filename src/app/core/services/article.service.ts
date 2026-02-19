@@ -4,7 +4,7 @@ import { map } from 'rxjs/operators';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Observable } from 'rxjs';
 import { ApiResponse } from '@shared/models/api.response.model';
-import { AllArticles } from '@shared/models/allArticles.model';
+import { ArticlesPaginated } from '@shared/models/allArticles.model';
 import { API_PATHS } from '@shared/constants/path.constants';
 import { Article } from '@shared/models/article.model';
 import { NetworkService } from './network.service';
@@ -24,11 +24,11 @@ export class ArticleService {
    * @param params all filtering params
    * @return {Observable}
    */
-  getAllArticles(params: Params): Observable<AllArticles> {
+  getAllArticles(params: Params): Observable<ArticlesPaginated> {
     const reqParams = new HttpParams({
       fromObject: params,
     });
-    return this.network.get<ApiResponse<AllArticles>>(API_PATHS.allArticles, { params: reqParams }).pipe(
+    return this.network.get<ApiResponse<ArticlesPaginated>>(API_PATHS.allArticles, { params: reqParams }).pipe(
       map(resp => {
         return resp.data;
       })

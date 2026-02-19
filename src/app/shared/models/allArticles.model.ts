@@ -1,6 +1,6 @@
 import { Article } from './article.model';
 
-export interface AllArticles {
+export interface ArticlesPaginated {
   currentPage: number;
   data: Article[];
   pageSize: number;
