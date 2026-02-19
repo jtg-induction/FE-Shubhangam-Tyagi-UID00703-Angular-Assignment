@@ -13,7 +13,7 @@
 
       <mat-form-field class="full-width">
         <mat-label>Password</mat-label>
-        <input matInput placeholder="Enter Password" formControlName="password" type="{{ !show ? 'password' : 'text' }}" />
+        <input matInput placeholder="Enter Password" formControlName="password" type="{{ !show ? 'password' : 'text' }}" (input)="hidePass()" />
         <mat-icon matSuffix (click)="togglePasswordShow()">{{ !show ? 'visibility_off' : 'visibility' }}</mat-icon>
         <mat-error>{{ loginForm.get('password') | controlError: 'Password' }}</mat-error>
       </mat-form-field>

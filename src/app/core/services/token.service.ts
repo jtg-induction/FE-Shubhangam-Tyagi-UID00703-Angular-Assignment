@@ -4,11 +4,17 @@ import { Injectable } from '@angular/core';
  */
 @Injectable({ providedIn: 'root' })
 export class TokenService {
+  private token: string | null = null;
+
+  constructor() {
+    this.token = localStorage.getItem('Token');
+  }
   /**
    * Stores the token in localstorage
    * @param {string} token - the user's token
    */
   saveToken(token: string) {
+    this.token = token;
     localStorage.setItem('Token', token);
   }
 
@@ -16,14 +22,15 @@ export class TokenService {
    * Deletes the token in localstorage
    */
   deleteToken() {
+    this.token = null;
     localStorage.removeItem('Token');
   }
 
   /**
-   * Gets the token in localstorage
+   * Gets the token from memory
    * @returns {string} token - the user's token
    */
-  getToken() {
-    return localStorage.getItem('Token');
+  getToken(): string | null {
+    return this.token;
   }
 }

@@ -1,16 +1,6 @@
-import { Article } from './article.model';
-
-export interface ApiResponse {
+export interface ApiResponse<T> {
   success: boolean;
   message: string;
-  data: data;
+  data: T;
   timestamp: string;
-}
-
-export interface data {
-  currentPage: number;
-  data: Article[];
-  pageSize: number;
-  totalItems: number;
-  totalPages: number;
 }

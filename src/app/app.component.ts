@@ -9,6 +9,7 @@ import { AuthService } from '@core/services/auth.service';
 export class AppComponent implements OnInit {
   title = 'Blog99';
   authService: AuthService = inject(AuthService);
+
   ngOnInit(): void {
     this.authService.autoLogin();
   }

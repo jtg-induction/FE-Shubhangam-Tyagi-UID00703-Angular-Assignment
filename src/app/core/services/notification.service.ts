@@ -8,18 +8,20 @@ export class NotificationService {
   private snackbarSubject = new Subject<Notification>();
   public snackbarState = this.snackbarSubject.asObservable();
 
-  showSuccess(message: string) {
+  showSuccess(message: string, duration = 3000) {
     this.snackbarSubject.next({
       show: true,
       message,
       type: 'success',
+      duration: duration,
     });
   }
-  showError(message: string) {
+  showError(message: string, duration = 3000) {
     this.snackbarSubject.next({
       show: true,
       message,
       type: 'danger',
+      duration: duration,
     });
   }
 }

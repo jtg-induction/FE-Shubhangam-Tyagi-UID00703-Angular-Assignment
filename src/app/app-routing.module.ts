@@ -9,10 +9,9 @@ const routes: Routes = [
     component: MainLayoutComponent,
     children: [
       { path: '', redirectTo: 'articles', pathMatch: 'full' },
-      { path: 'auth', loadChildren: () => import('@modules/auth/auth.module').then(m => m.AuthModule) },
-      { path: 'articles', loadChildren: () => import('@modules/dashboard/dashboard.module').then(m => m.DashboardModule) },
+      { path: 'auth', loadChildren: () => import('@modules/auth/auth.module').then(m => m.AuthModule), canActivate: [authGuard] },
+      { path: 'articles', loadChildren: () => import('@modules/dashboard/dashboard.module').then(m => m.DashboardModule), canActivate: [authGuard] },
     ],
-    canActivate: [authGuard],
   },
   { path: '**', component: PageNotFoundComponent }, // Wildcard
 ];

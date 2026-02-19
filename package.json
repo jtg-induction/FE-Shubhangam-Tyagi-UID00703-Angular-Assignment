@@ -10,7 +10,7 @@
     "lint": "ng lint && stylelint src/**/*.scss",
     "lint:fix": "ng lint --fix &&  stylelint src/**/*.scss --fix",
     "format": "prettier --write .",
-    "prepare": "husky",  
+    "prepare": "husky",
     "pre-comit": "lint-staged"
   },
   "private": true,
